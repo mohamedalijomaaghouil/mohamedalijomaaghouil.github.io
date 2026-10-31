@@ -7,7 +7,11 @@
 <meta name="description" content="Robotics & mechatronics engineering student (SIGMA Clermont / ENISo). ROS 2, force control, computer vision. Looking for a 6-month end-of-studies internship from March 2027.">
 <meta property="og:title" content="Mohamed Ali Jomaa Ghouil · Robotics Portfolio">
 <meta property="og:description" content="ROS 2, force control and computer vision on real robots. Looking for a 6-month PFE from 7 March 2027.">
-<meta property="og:image" content="assets/img/poster-citius-demo.jpg">
+<meta property="og:image" content="https://mohamedalijomaaghouil.github.io/assets/img/poster-citius-demo.jpg">
+<meta property="og:url" content="https://mohamedalijomaaghouil.github.io/">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://mohamedalijomaaghouil.github.io/">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%2310141a'/><text x='16' y='21' font-family='monospace' font-size='13' font-weight='700' fill='%2368e1b4' text-anchor='middle'>MA</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -135,7 +139,7 @@ h2{font-size:30px;letter-spacing:-.01em;margin:0 0 28px}
 .contact h2{font-size:clamp(28px,5vw,40px);margin-bottom:10px}
 .contact p{color:var(--muted);margin:0 auto 26px;max-width:52ch}
 .contact .btns{justify-content:center}
-.copy-row{display:inline-flex;align-items:center;gap:6px;margin-bottom:18px;padding:6px 6px 6px 16px;border:1px solid var(--line);border-radius:12px;background:var(--card);font-family:var(--mono);font-size:14px;max-width:100%}
+.copy-row{display:flex;width:fit-content;margin-left:auto;margin-right:auto;align-items:center;gap:6px;margin-bottom:10px;padding:6px 6px 6px 16px;border:1px solid var(--line);border-radius:12px;background:var(--card);font-family:var(--mono);font-size:14px;max-width:100%}
 .copy-row span{overflow:hidden;text-overflow:ellipsis}
 footer{border-top:1px solid var(--line);padding:24px 0 40px;color:var(--faint);font-size:13px}
 footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
@@ -420,12 +424,18 @@ dialog video,dialog .d-img{width:100%;border-radius:12px;background:#000}
     <h2>Let's talk</h2>
     <p>Robotics, computer vision or industrial AI team with a PFE from March 2027? I'd be glad to hear about it.</p>
     <div class="copy-row"><span id="mail">mohamedalijomaaghouil@gmail.com</span>
-      <button class="icon-btn" id="copyMail" aria-label="Copy email address" title="Copy">
+      <button class="icon-btn" data-copy="mail" aria-label="Copy email address" title="Copy">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
+      </button>
+    </div>
+    <div class="copy-row"><span id="phone">+33 6 63 98 91 44</span>
+      <button class="icon-btn" data-copy="phone" aria-label="Copy phone number" title="Copy">
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
       </button>
     </div>
     <div class="btns">
       <a class="btn primary" href="mailto:mohamedalijomaaghouil@gmail.com">Send an email</a>
+      <a class="btn" href="tel:+33663989144">Call</a>
       <a class="btn" href="https://www.linkedin.com/in/mohamed-ali-jomaa-ghouil/" target="_blank" rel="noopener">LinkedIn</a>
       <a class="btn" href="https://github.com/mohamedalijomaaghouil" target="_blank" rel="noopener">GitHub</a>
     </div>
@@ -602,12 +612,12 @@ dialog video,dialog .d-img{width:100%;border-radius:12px;background:#000}
   document.querySelectorAll(".reveal").forEach(el => rio.observe(el));
 
   // copy email
-  document.getElementById("copyMail").addEventListener("click", async e => {
+  document.querySelectorAll("[data-copy]").forEach(b => b.addEventListener("click", async () => {
     try {
-      await navigator.clipboard.writeText(document.getElementById("mail").textContent);
-      e.currentTarget.textContent = "✓";
+      await navigator.clipboard.writeText(document.getElementById(b.dataset.copy).textContent);
+      b.textContent = "✓";
     } catch (err) {}
-  });
+  }));
 })();
 </script>
 </body>
