@@ -1,0 +1,614 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mohamed Ali Jomaa Ghouil · Robotics Portfolio</title>
+<meta name="description" content="Robotics & mechatronics engineering student (SIGMA Clermont / ENISo). ROS 2, force control, computer vision. Looking for a 6-month end-of-studies internship from March 2027.">
+<meta property="og:title" content="Mohamed Ali Jomaa Ghouil · Robotics Portfolio">
+<meta property="og:description" content="ROS 2, force control and computer vision on real robots. Looking for a 6-month PFE from 7 March 2027.">
+<meta property="og:image" content="assets/img/poster-citius-demo.jpg">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%2310141a'/><text x='16' y='21' font-family='monospace' font-size='13' font-weight='700' fill='%2368e1b4' text-anchor='middle'>MA</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0c0e12; --bg-2:#12151b; --card:#161a21; --line:#232833;
+  --text:#e9edf2; --muted:#9aa3b2; --faint:#6b7382;
+  --accent:#68e1b4; --accent-ink:#06261b;
+  --radius:16px; --max:960px;
+  --mono:"JetBrains Mono",ui-monospace,monospace;
+  --sans:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+:root[data-theme="light"]{
+  --bg:#f7f7f4; --bg-2:#efefea; --card:#ffffff; --line:#e2e2dc;
+  --text:#15181d; --muted:#545b66; --faint:#868c96;
+  --accent:#0f8a63; --accent-ink:#ffffff;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:80px}
+body{margin:0;background:var(--bg);color:var(--text);font:16px/1.6 var(--sans);-webkit-font-smoothing:antialiased}
+img,video{display:block;max-width:100%}
+a{color:inherit}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 20px}
+
+/* nav */
+.nav{position:sticky;top:0;z-index:20;backdrop-filter:blur(14px);background:color-mix(in srgb,var(--bg) 78%,transparent);border-bottom:1px solid var(--line)}
+.nav .wrap{display:flex;align-items:center;gap:16px;height:60px}
+.brand{font-weight:600;text-decoration:none;white-space:nowrap}
+.nav ul{display:flex;gap:4px;margin:0 0 0 auto;padding:0;list-style:none}
+.nav ul a{display:block;padding:6px 10px;border-radius:8px;text-decoration:none;color:var(--muted);font-size:14px}
+.nav ul a:hover{color:var(--text);background:var(--bg-2)}
+.icon-btn{border:1px solid var(--line);background:transparent;color:var(--muted);width:34px;height:34px;border-radius:9px;cursor:pointer;display:grid;place-items:center}
+.icon-btn:hover{color:var(--text)}
+@media (max-width:760px){.nav ul{display:none}.nav .icon-btn{margin-left:auto}}
+
+/* hero */
+.hero{padding:72px 0 40px;display:grid;grid-template-columns:1fr 220px;gap:40px;align-items:center}
+.hello{font-family:var(--mono);color:var(--accent);font-size:14px;margin:0 0 10px}
+h1{font-size:clamp(34px,6vw,54px);line-height:1.05;letter-spacing:-.02em;margin:0 0 10px}
+.role{color:var(--muted);font-size:18px;margin:0 0 18px}
+.bio{margin:0 0 14px;max-width:58ch}
+.status{display:inline-flex;border-radius:14px;align-items:center;gap:8px;font-size:14px;padding:6px 12px;border:1px solid var(--line);background:var(--bg-2);margin:4px 0 22px}
+.status i{flex:none;width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 4px color-mix(in srgb,var(--accent) 25%,transparent)}
+.portrait{width:220px;height:auto;aspect-ratio:4/5;object-fit:cover;border-radius:22px;border:1px solid var(--line)}
+.btns{display:flex;flex-wrap:wrap;gap:10px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border-radius:11px;border:1px solid var(--line);background:var(--card);text-decoration:none;font-weight:500;font-size:15px;cursor:pointer;color:var(--text);font-family:inherit}
+.btn:hover{border-color:var(--faint)}
+.btn.primary{background:var(--accent);color:var(--accent-ink);border-color:transparent}
+.btn svg{width:17px;height:17px}
+@media (max-width:760px){.hero{grid-template-columns:1fr;padding-top:40px}.portrait{width:140px;order:-1}}
+
+/* sections */
+section{padding:56px 0;border-top:1px solid var(--line)}
+.kicker{font-family:var(--mono);font-size:13px;color:var(--accent);margin:0 0 6px;text-transform:uppercase;letter-spacing:.08em}
+h2{font-size:30px;letter-spacing:-.01em;margin:0 0 28px}
+.lead{color:var(--muted);margin:-16px 0 28px;max-width:62ch}
+
+/* project cards */
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+@media (max-width:700px){.grid{grid-template-columns:1fr}}
+.card{all:unset;box-sizing:border-box;cursor:pointer;display:flex;flex-direction:column;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;transition:transform .25s,border-color .25s}
+.card:hover,.card:focus-visible{transform:translateY(-3px);border-color:var(--faint)}
+.card:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.card .media{aspect-ratio:16/10;background:var(--bg-2);position:relative;overflow:hidden}
+.card .media img,.card .media video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.card .body{padding:16px 18px 18px;display:flex;flex-direction:column;gap:6px;flex:1}
+.meta{display:flex;justify-content:space-between;gap:10px;font-family:var(--mono);font-size:12px;color:var(--faint)}
+.card h3{margin:0;font-size:18px;line-height:1.3}
+.card p{margin:0;color:var(--muted);font-size:14.5px}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto;padding-top:10px}
+.tag{font-family:var(--mono);font-size:11.5px;padding:3px 8px;border-radius:6px;background:var(--bg-2);color:var(--muted);border:1px solid var(--line)}
+.card.wide{grid-column:1/-1}
+@media (min-width:701px){.card.wide{flex-direction:row}.card.wide .media{flex:1.3;aspect-ratio:auto;min-height:280px}.card.wide .body{flex:1;padding:24px}}
+
+/* timeline */
+.tl{list-style:none;margin:0;padding:0}
+.tl li{display:grid;grid-template-columns:1fr auto;gap:4px 20px;padding:18px 0;border-bottom:1px solid var(--line)}
+.tl li:last-child{border-bottom:0}
+.tl h3{margin:0;font-size:17px}
+.tl .org{color:var(--muted);font-size:15px}
+.tl .when{font-family:var(--mono);font-size:13px;color:var(--faint);white-space:nowrap;text-align:right}
+.tl ul{grid-column:1/-1;margin:6px 0 0;padding-left:18px;color:var(--muted);font-size:15px}
+.tl ul li{display:list-item;border:0;padding:2px 0}
+@media (max-width:560px){.tl li{grid-template-columns:1fr}.tl .when{text-align:left}}
+
+/* leadership */
+.lead-card{display:grid;grid-template-columns:1fr 1fr;gap:24px;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:22px;margin-bottom:18px}
+.lead-card h3{margin:0 0 4px;font-size:20px}
+.lead-card .org{color:var(--muted);margin:0 0 12px;font-size:15px}
+.lead-card ul{margin:0;padding-left:18px;color:var(--muted);font-size:15px}
+.lead-card li{margin:4px 0}
+.lead-card strong{color:var(--text);font-weight:600}
+.mosaic{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;align-content:start}
+.mosaic button{all:unset;cursor:zoom-in;border-radius:10px;overflow:hidden;aspect-ratio:3/4;background:var(--bg-2);position:relative}
+.mosaic button:focus-visible{outline:2px solid var(--accent)}
+.mosaic img,.mosaic video{width:100%;height:100%;object-fit:cover;transition:transform .35s}
+.mosaic button:hover img{transform:scale(1.04)}
+.mosaic .play::after{content:"▶";position:absolute;inset:auto 8px 8px auto;width:28px;height:28px;border-radius:50%;background:rgba(0,0,0,.6);color:#fff;font-size:11px;display:grid;place-items:center}
+.cap{font-family:var(--mono);font-size:11px;color:var(--faint);grid-column:1/-1;margin-top:2px}
+@media (max-width:760px){.lead-card{grid-template-columns:1fr}}
+.mini{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+@media (max-width:760px){.mini{grid-template-columns:1fr}}
+.mini .lead-card{display:block;margin:0}
+.mini .mosaic{grid-template-columns:repeat(2,1fr);margin-top:14px}
+
+/* edu / certs / skills */
+.two{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+@media (max-width:700px){.two{grid-template-columns:1fr}}
+.box{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:20px}
+.box h3{margin:0 0 2px;font-size:17px}
+.box p{margin:4px 0 0;color:var(--muted);font-size:15px}
+.certs{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media (max-width:700px){.certs{grid-template-columns:1fr}}
+.certs li a,.certs li span.c{display:flex;justify-content:space-between;gap:12px;padding:14px 16px;border:1px solid var(--line);border-radius:12px;background:var(--card);text-decoration:none;font-size:15px}
+.certs li a:hover{border-color:var(--faint)}
+.certs small{font-family:var(--mono);color:var(--faint);font-size:12px;white-space:nowrap}
+.skills{display:grid;grid-template-columns:160px 1fr;gap:10px 20px;margin:0}
+.skills dt{font-family:var(--mono);font-size:13px;color:var(--faint);padding-top:3px}
+.skills dd{margin:0;display:flex;flex-wrap:wrap;gap:6px}
+@media (max-width:560px){.skills{grid-template-columns:1fr}.skills dd{margin-bottom:10px}}
+
+/* contact */
+.contact{text-align:center;padding:72px 0}
+.contact h2{font-size:clamp(28px,5vw,40px);margin-bottom:10px}
+.contact p{color:var(--muted);margin:0 auto 26px;max-width:52ch}
+.contact .btns{justify-content:center}
+.copy-row{display:inline-flex;align-items:center;gap:6px;margin-bottom:18px;padding:6px 6px 6px 16px;border:1px solid var(--line);border-radius:12px;background:var(--card);font-family:var(--mono);font-size:14px;max-width:100%}
+.copy-row span{overflow:hidden;text-overflow:ellipsis}
+footer{border-top:1px solid var(--line);padding:24px 0 40px;color:var(--faint);font-size:13px}
+footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+
+/* dialog */
+dialog{border:1px solid var(--line);border-radius:20px;background:var(--bg);color:var(--text);padding:0;width:min(860px,calc(100vw - 24px));max-height:calc(100dvh - 24px)}
+dialog::backdrop{background:rgba(4,6,9,.72);backdrop-filter:blur(4px)}
+dialog .d-head{position:sticky;top:0;display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 18px;background:var(--bg);border-bottom:1px solid var(--line);z-index:1}
+dialog .d-head .meta{font-size:12px}
+dialog .d-body{padding:22px}
+dialog h3{font-size:26px;margin:0 0 6px;line-height:1.2}
+dialog .sub{color:var(--muted);margin:0 0 18px}
+dialog h4{font-family:var(--mono);font-size:13px;color:var(--accent);text-transform:uppercase;letter-spacing:.08em;margin:24px 0 8px}
+dialog ul{padding-left:18px;margin:0}
+dialog li{margin:5px 0}
+dialog video,dialog .d-img{width:100%;border-radius:12px;background:#000}
+.gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:8px;margin-top:6px}
+.gallery img,.gallery video{width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:10px}
+.stat-row{display:flex;flex-wrap:wrap;gap:10px;margin:16px 0 4px}
+.stat{flex:1 1 150px;border:1px solid var(--line);border-radius:12px;padding:12px 14px;background:var(--card)}
+.stat b{display:block;font-size:22px;letter-spacing:-.01em}
+.stat span{color:var(--muted);font-size:13px}
+.note{font-size:14px;color:var(--muted);border-left:3px solid var(--accent);padding:4px 0 4px 12px;margin:16px 0 0}
+#lightbox{width:auto;max-width:calc(100vw - 24px);background:#000;border:0}
+#lightbox img,#lightbox video{max-height:calc(100dvh - 90px);max-width:calc(100vw - 24px);width:auto;margin:auto;border-radius:0}
+#lightbox .d-head{background:#000;border-color:#222;color:#ddd}
+
+.js .reveal{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s ease}
+.js .reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}.reveal{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+
+<nav class="nav" aria-label="Main">
+  <div class="wrap">
+    <a class="brand" href="#top">Mohamed Ali Jomaa Ghouil</a>
+    <ul>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#leadership">Leadership</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <button class="icon-btn" id="themeBtn" aria-label="Toggle light/dark theme" title="Toggle theme">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+    </button>
+  </div>
+</nav>
+
+<main id="top" class="wrap">
+
+  <!-- HERO -->
+  <header class="hero">
+    <div>
+      <p class="hello">👋 Hello, I'm</p>
+      <h1>Mohamed Ali<br>Jomaa Ghouil</h1>
+      <p class="role">Robotics &amp; Mechatronics Engineering Student · SIGMA Clermont × ENISo</p>
+      <p class="bio">I work where robots meet the real world: force sensors, grippers, cameras and the code that ties them together under <strong>ROS&nbsp;2</strong>. Most recently I made a UR5e arm guidable by hand and replayable to <strong>0.37&nbsp;mrad RMS</strong>, and tracked a force-sensor bug down to the raw EtherCAT bytes.</p>
+      <div class="status"><i></i><span>Looking for a 6-month end-of-studies internship (PFE) from <strong>7&nbsp;March&nbsp;2027</strong>, anywhere in France</span></div>
+      <div class="btns">
+        <button class="btn primary" data-open="dlg-videocv">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>Watch my 90-second intro</button>
+        <a class="btn" href="assets/docs/CV_JomaaGhouil.pdf" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12m0 0-4-4m4 4 4-4M5 21h14"/></svg>CV (PDF)</a>
+        <a class="btn" href="https://www.linkedin.com/in/mohamed-ali-jomaa-ghouil/" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="btn" href="https://github.com/mohamedalijomaaghouil" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </div>
+    <img class="portrait" src="assets/img/profile.jpg" alt="Portrait of Mohamed Ali Jomaa Ghouil" width="720" height="900">
+  </header>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <p class="kicker">Projects</p>
+    <h2>Things I built on real hardware</h2>
+    <div class="grid">
+
+      <button class="card wide reveal" data-open="dlg-ur5e">
+        <div class="media">
+          <video muted loop playsinline preload="none" poster="assets/img/poster-citius-demo.jpg" data-src="assets/video/citius-demo-loop.mp4"></video>
+        </div>
+        <div class="body">
+          <div class="meta"><span>CiTIUS · Spain</span><span>2026</span></div>
+          <h3>Teach a UR5e by hand, replay it exactly</h3>
+          <p>Admittance controller in C++ under ROS&nbsp;2 Jazzy: you push the arm, it follows. A 242&nbsp;s demonstration with the gripper is recorded and replayed with 0.37&nbsp;mrad RMS tracking error.</p>
+          <div class="tags"><span class="tag">ROS 2</span><span class="tag">C++</span><span class="tag">UR5e</span><span class="tag">ros2_control</span><span class="tag">SCHUNK EGK 50</span></div>
+        </div>
+      </button>
+
+      <button class="card reveal" data-open="dlg-hexe">
+        <div class="media"><img loading="lazy" src="assets/img/citius-schunk.jpg" alt="UR5e with force sensor and SCHUNK gripper at CiTIUS"></div>
+        <div class="body">
+          <div class="meta"><span>CiTIUS · Spain</span><span>2026</span></div>
+          <h3>The force sensor that read 100× too low</h3>
+          <p>Integrated an OnRobot HEX-E v2 over EtherCAT, found the decoding error in the raw bytes, fixed the driver and calibrated: mean error 2.77&nbsp;N → 0.69&nbsp;N.</p>
+          <div class="tags"><span class="tag">EtherCAT</span><span class="tag">Calibration</span><span class="tag">ROS 2</span></div>
+        </div>
+      </button>
+
+      <button class="card reveal" data-open="dlg-inspection">
+        <div class="media"><img loading="lazy" src="assets/img/inspection-2473.jpg" alt="UR3e robot inspecting a shoe at SIGMA Clermont"></div>
+        <div class="body">
+          <div class="meta"><span>SIGMA Clermont · team of 3</span><span>2025–26</span></div>
+          <h3>Robotic defect inspection with a UR3e</h3>
+          <p>A UR3e with a RealSense camera photographs a shoe from several angles to find defects. My part: locating the part in 3D from the depth image. Ranked 2nd of 93.</p>
+          <div class="tags"><span class="tag">OpenCV</span><span class="tag">RGB-D</span><span class="tag">ROS 2</span><span class="tag">Python</span></div>
+        </div>
+      </button>
+
+      <button class="card reveal" data-open="dlg-followme">
+        <div class="media">
+          <video muted loop playsinline preload="none" poster="assets/img/poster-followme.jpg" data-src="assets/video/followme-loop.mp4"></video>
+        </div>
+        <div class="body">
+          <div class="meta"><span>ENISo · team of 3</span><span>2025</span></div>
+          <h3>FOLLOW-ME: a person-following robot</h3>
+          <p>Raise your hand and the robot follows you at 2&nbsp;m, using body pose and depth. Speeds are sent to the base over Modbus TCP.</p>
+          <div class="tags"><span class="tag">MediaPipe</span><span class="tag">RealSense D435i</span><span class="tag">Modbus TCP</span></div>
+        </div>
+      </button>
+
+      <button class="card reveal" data-open="dlg-arduino">
+        <div class="media">
+          <video muted loop playsinline preload="none" poster="assets/img/poster-enisoteam-robot.jpg" data-src="assets/video/enisoteam-loop.mp4"></video>
+        </div>
+        <div class="body">
+          <div class="meta"><span>ENISo Team robotics club</span><span>2023–24</span></div>
+          <h3>Where it started: a 4-wheel Arduino robot</h3>
+          <p>My first robot, built from scratch in the ENISo robotics club's first tutorial.</p>
+          <div class="tags"><span class="tag">Arduino Uno</span><span class="tag">DC motors</span></div>
+        </div>
+      </button>
+
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <p class="kicker">Experience</p>
+    <h2>Internships</h2>
+    <ol class="tl">
+      <li class="reveal">
+        <div><h3>Assistant Engineer Intern · Collaborative Robotics</h3><div class="org">CiTIUS, University of Santiago de Compostela · Spain · EU project ROBOTA-SUDOE</div></div>
+        <div class="when">May – Sep 2026</div>
+        <ul>
+          <li>Ported an admittance controller to C++ (125&nbsp;Hz) under ROS&nbsp;2 Jazzy and tuned it on the real UR5e.</li>
+          <li>Integrated an EtherCAT force sensor (OnRobot HEX-E v2) and a SCHUNK EGK&nbsp;50 gripper (Python node, TCP socket, 10&nbsp;Hz position feedback).</li>
+          <li>Synchronised recording and replay of arm + gripper: 0.37&nbsp;mrad RMS over a 242&nbsp;s demonstration.</li>
+        </ul>
+      </li>
+      <li class="reveal">
+        <div><h3>Assistant Engineer Intern · Industrial Instrumentation &amp; Data Analysis</h3><div class="org">Hutchinson · Sousse, Tunisia</div></div>
+        <div class="when">Jun – Aug 2025</div>
+        <ul>
+          <li>Studied a robotic quality-control cell in production: KUKA robot, KEYENCE industrial vision, sensors.</li>
+          <li>Wrote Python tools (NumPy, Pandas, Matplotlib) to process and visualise industrial data.</li>
+        </ul>
+      </li>
+      <li class="reveal">
+        <div><h3>Shop-floor Intern · Production &amp; Test Benches</h3><div class="org">COLMAR S.A. · Monastir, Tunisia</div></div>
+        <div class="when">Jun – Jul 2024</div>
+        <ul><li>Observed automated industrial processes and analysed the test benches.</li></ul>
+      </li>
+    </ol>
+  </section>
+
+  <!-- LEADERSHIP -->
+  <section id="leadership">
+    <p class="kicker">Leadership &amp; community</p>
+    <h2>Beyond the lab</h2>
+    <p class="lead">Engineering is also clients, events and people. I spent my ENISo years in the junior enterprise and on the team that welcomes companies to the school's industry forum.</p>
+
+    <article class="lead-card reveal">
+      <div>
+        <h3>JEENISo, Junior Enterprise of ENISo</h3>
+        <p class="org">Junior member, External Affairs pole · 2023–24 · then senior member 2024–25</p>
+        <ul>
+          <li><strong>Client project, Résidence Aïcha:</strong> on the front-end team of an apartment-rental platform for a residence; I built the <strong>home page in React + TypeScript</strong>. Selected by interview for the project.</li>
+          <li><strong>External Affairs:</strong> relations with partner junior enterprises abroad, joint events and projects, prospecting new partners.</li>
+          <li><strong>Business-unit phase:</strong> one month, 4 teams of 10, a new challenge from the board every week.</li>
+          <li><strong>Events:</strong> organiser of <strong>START IT UP 2.0</strong>; took part in <strong>JET'XPO 2023-24</strong> (national junior-enterprise fair, Cité de la Culture, Tunis) and <strong>JOBS 2K24</strong> (JET's national 3-day seminar).</li>
+        </ul>
+      </div>
+      <div class="mosaic">
+        <button data-lightbox="assets/img/jeeniso-team.jpg" data-cap="JEENISo team at JET'XPO"><img loading="lazy" src="assets/img/jeeniso-team.jpg" alt="JEENISo team"></button>
+        <button data-lightbox="assets/img/jetxpo-2.jpg" data-cap="JET'XPO 2023-24"><img loading="lazy" src="assets/img/jetxpo-2.jpg" alt="On stage at JET'XPO 2023-24"></button>
+        <button data-lightbox="assets/img/startitup.jpg" data-cap="START IT UP 2.0, organising team"><img loading="lazy" src="assets/img/startitup.jpg" alt="START IT UP 2.0"></button>
+        <button data-lightbox="assets/img/jobs-1544.jpg" data-cap="JOBS 2K24"><img loading="lazy" src="assets/img/jobs-1544.jpg" alt="JOBS 2K24"></button>
+        <button class="play" data-lightbox="assets/video/jeeniso-reel-1.mp4" data-cap="JEENISo Instagram reel"><img loading="lazy" src="assets/img/poster-jeeniso-reel-1.jpg" alt="JEENISo reel"></button>
+        <button class="play" data-lightbox="assets/video/jeeniso-reel-2.mp4" data-cap="JEENISo Instagram reel"><img loading="lazy" src="assets/img/poster-jeeniso-reel-2.jpg" alt="JEENISo reel"></button>
+      </div>
+    </article>
+
+    <article class="lead-card reveal">
+      <div>
+        <h3>FCEE'13, Welcome Team Leader</h3>
+        <p class="org">Forum de Convergence ENISo-Entreprises · 13th edition · 2024</p>
+        <ul>
+          <li>Led the welcome team of ENISo's yearly school–industry forum, which ENISo has organised since 2012.</li>
+          <li>First contact for the companies and guests arriving at the forum.</li>
+        </ul>
+      </div>
+      <div class="mosaic" style="grid-template-columns:minmax(0,260px);justify-content:end">
+        <button data-lightbox="assets/img/fcee13.jpg" data-cap="FCEE'13, 2024"><img loading="lazy" src="assets/img/fcee13.jpg" alt="At FCEE'13"></button>
+      </div>
+    </article>
+
+    <div class="mini">
+      <article class="lead-card reveal">
+        <h3>ENISo Team</h3>
+        <p class="org">Robotics club · 2023–24</p>
+        <ul><li>First hands-on robotics: an Arduino Uno 4-wheel robot built from scratch.</li></ul>
+        <div class="mosaic">
+          <button class="play" data-lightbox="assets/video/enisoteam-robot.mp4" data-cap="ENISo Team, first robot"><img loading="lazy" src="assets/img/poster-enisoteam-robot.jpg" alt="Arduino robot"></button>
+        </div>
+      </article>
+      <article class="lead-card reveal">
+        <h3>Deep Learning IndabaX Tunisia</h3>
+        <p class="org">Participant · 2025</p>
+        <ul><li>Tunisia's edition of the African deep-learning community event.</li></ul>
+        <div class="mosaic">
+          <button data-lightbox="assets/img/indabax.jpg" data-cap="IndabaX Tunisia 2025"><img loading="lazy" src="assets/img/indabax.jpg" alt="At IndabaX Tunisia 2025"></button>
+          <button data-lightbox="assets/img/indabax-1948.jpg" data-cap="IndabaX Tunisia 2025"><img loading="lazy" src="assets/img/indabax-1948.jpg" alt="IndabaX name card"></button>
+        </div>
+      </article>
+      <article class="lead-card reveal">
+        <h3>Industrial visit, SOPAL</h3>
+        <p class="org">ENISo · 2025</p>
+        <ul><li>Factory visit organised by ENISo.</li></ul>
+        <div class="mosaic">
+          <button data-lightbox="assets/img/sopal-4701.jpg" data-cap="SOPAL visit, 2025"><img loading="lazy" src="assets/img/sopal-4701.jpg" alt="In front of SOPAL"></button>
+          <button data-lightbox="assets/img/sopal-inside.jpg" data-cap="SOPAL visit, 2025"><img loading="lazy" src="assets/img/sopal-inside.jpg" alt="Inside the SOPAL plant"></button>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section id="education">
+    <p class="kicker">Education</p>
+    <h2>Double degree, France × Tunisia</h2>
+    <div class="two">
+      <div class="box reveal">
+        <div class="meta"><span>Clermont-Ferrand, France</span><span>2025 – 2027</span></div>
+        <h3>SIGMA Clermont (Clermont Auvergne INP)</h3>
+        <p>Engineering degree · Robotics, Mechanisms &amp; Systems</p>
+        <p>Ranked <strong>3rd / 182</strong> in semester 7 · Programming for Robotics 18.8/20</p>
+      </div>
+      <div class="box reveal">
+        <div class="meta"><span>Sousse, Tunisia</span><span>2023 – 2025</span></div>
+        <h3>ENISo, École Nationale d'Ingénieurs de Sousse</h3>
+        <p>Engineering degree · Mechatronics</p>
+        <p>PLCs &amp; industrial networks, control systems, C/C++</p>
+      </div>
+    </div>
+
+    <h2 style="margin-top:48px;font-size:22px">Certifications</h2>
+    <ul class="certs">
+      <li><a href="assets/docs/nvidia-cv-industrial-inspection.pdf" target="_blank" rel="noopener">NVIDIA · Computer Vision for Industrial Inspection <small>2025 ↗</small></a></li>
+      <li><a href="assets/docs/nvidia-deep-learning.pdf" target="_blank" rel="noopener">NVIDIA · Fundamentals of Deep Learning <small>2025 ↗</small></a></li>
+      <li><a href="assets/docs/nvidia-ai-predictive-maintenance.pdf" target="_blank" rel="noopener">NVIDIA · AI for Predictive Maintenance <small>2025 ↗</small></a></li>
+      <li><span class="c">Dassault Systèmes · SOLIDWORKS CSWA <small>2025</small></span></li>
+      <li><span class="c">TOEIC · 955 / 990 (C1) <small></small></span></li>
+      <li><a href="assets/docs/fundamental-competencies-program.pdf" target="_blank" rel="noopener">Fundamental Competencies Program, 40 h · American Corner Sousse <small>2025 ↗</small></a></li>
+    </ul>
+
+    <h2 style="margin-top:48px;font-size:22px">Skills</h2>
+    <dl class="skills">
+      <dt>Robotics</dt><dd><span class="tag">ROS 2</span><span class="tag">ros2_control</span><span class="tag">Universal Robots UR5e / UR3e</span><span class="tag">KUKA</span><span class="tag">Force sensors</span><span class="tag">Calibration</span></dd>
+      <dt>Vision &amp; AI</dt><dd><span class="tag">OpenCV</span><span class="tag">RGB-D</span><span class="tag">Intel RealSense</span><span class="tag">MediaPipe</span><span class="tag">Machine Learning</span><span class="tag">PyTorch (coursework)</span></dd>
+      <dt>Programming</dt><dd><span class="tag">C++</span><span class="tag">Python</span><span class="tag">NumPy / Pandas / Matplotlib</span><span class="tag">Linux</span><span class="tag">Git</span><span class="tag">React + TypeScript</span></dd>
+      <dt>Industrial</dt><dd><span class="tag">EtherCAT</span><span class="tag">Modbus TCP</span><span class="tag">PLCs</span></dd>
+      <dt>Simulation &amp; CAD</dt><dd><span class="tag">MATLAB / Simulink</span><span class="tag">Simscape</span><span class="tag">CATIA</span><span class="tag">SOLIDWORKS</span></dd>
+      <dt>Languages</dt><dd><span class="tag">French · fluent</span><span class="tag">English · C1</span><span class="tag">Arabic · native</span><span class="tag">Spanish · A2</span></dd>
+    </dl>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="contact">
+    <p class="kicker">Contact</p>
+    <h2>Let's talk</h2>
+    <p>Robotics, computer vision or industrial AI team with a PFE from March 2027? I'd be glad to hear about it.</p>
+    <div class="copy-row"><span id="mail">mohamedalijomaaghouil@gmail.com</span>
+      <button class="icon-btn" id="copyMail" aria-label="Copy email address" title="Copy">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
+      </button>
+    </div>
+    <div class="btns">
+      <a class="btn primary" href="mailto:mohamedalijomaaghouil@gmail.com">Send an email</a>
+      <a class="btn" href="https://www.linkedin.com/in/mohamed-ali-jomaa-ghouil/" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="btn" href="https://github.com/mohamedalijomaaghouil" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </section>
+</main>
+
+<footer><div class="wrap"><span>© 2026 Mohamed Ali Jomaa Ghouil</span><a href="#top">Back to top ↑</a></div></footer>
+
+<!-- ============ DIALOGS ============ -->
+
+<dialog id="dlg-videocv" aria-label="Video introduction">
+  <div class="d-head"><span class="meta">Video CV · SIGMA Clermont · 1 min 26</span><button class="icon-btn" data-close aria-label="Close">✕</button></div>
+  <div class="d-body"><video controls preload="none" poster="assets/img/poster-video-cv.jpg" src="assets/video/video-cv.mp4"></video></div>
+</dialog>
+
+<dialog id="dlg-ur5e" aria-label="UR5e admittance control">
+  <div class="d-head"><span class="meta">CiTIUS · ROBOTA-SUDOE · May – Sep 2026</span><button class="icon-btn" data-close aria-label="Close">✕</button></div>
+  <div class="d-body">
+    <h3>Teach a UR5e by hand, replay it exactly</h3>
+    <p class="sub">Internship at CiTIUS (University of Santiago de Compostela), EU project ROBOTA-SUDOE on human–robot collaboration.</p>
+    <video controls preload="none" poster="assets/img/poster-citius-demo.jpg" src="assets/video/citius-demo.mp4"></video>
+    <div class="stat-row">
+      <div class="stat"><b>125 Hz</b><span>admittance loop, C++</span></div>
+      <div class="stat"><b>0.37 mrad</b><span>RMS tracking error on replay</span></div>
+      <div class="stat"><b>0.06 mm</b><span>final gripper error</span></div>
+    </div>
+    <h4>What I did</h4>
+    <ul>
+      <li>Ported the admittance controller to C++ under ROS&nbsp;2 Jazzy and tuned it on the real UR5e so an operator can guide the arm by hand.</li>
+      <li>Integrated a SCHUNK EGK&nbsp;50 gripper into the cell: Python node over a TCP socket, position feedback at 10&nbsp;Hz.</li>
+      <li>Recorded arm and gripper streams in sync, then replayed a 242&nbsp;s demonstration: 0.37&nbsp;mrad RMS joint tracking error, 0.06&nbsp;mm final gripper error.</li>
+    </ul>
+    <h4>Along the way</h4>
+    <div class="gallery">
+      <video controls preload="none" poster="assets/img/poster-citius-pickplace.jpg" src="assets/video/citius-pickplace.mp4"></video>
+      <img loading="lazy" src="assets/img/citius-rs8.jpg" alt="UR5e setup">
+      <img loading="lazy" src="assets/img/citius-schunk.jpg" alt="UR5e with SCHUNK gripper">
+      <img loading="lazy" src="assets/img/citius-team.jpg" alt="With my tutor and the two other interns">
+      <img loading="lazy" src="assets/img/citius-lab.jpg" alt="The CiTIUS robotics lab">
+    </div>
+    <p class="note">First step: a simple ROS&nbsp;2 pick-and-place (video above). Last photo: with my tutor and the two other interns.</p>
+    <div class="btns" style="margin-top:20px"><a class="btn" href="https://github.com/mohamedalijomaaghouil/robota-sudoe-ur5e-ros2" target="_blank" rel="noopener">Code on GitHub ↗</a></div>
+  </div>
+</dialog>
+
+<dialog id="dlg-hexe" aria-label="HEX-E force sensor">
+  <div class="d-head"><span class="meta">CiTIUS · ROBOTA-SUDOE · 2026</span><button class="icon-btn" data-close aria-label="Close">✕</button></div>
+  <div class="d-body">
+    <h3>The force sensor that read 100× too low</h3>
+    <p class="sub">Integrating a 6-axis OnRobot HEX-E v2 force/torque sensor over EtherCAT and publishing it in ROS&nbsp;2.</p>
+    <div class="stat-row">
+      <div class="stat"><b>×100</b><span>measurement error traced to byte decoding</span></div>
+      <div class="stat"><b>2.77 → 0.69 N</b><span>mean error after calibration</span></div>
+    </div>
+    <h4>The story</h4>
+    <ul>
+      <li>The sensor's readings were about 100 times too small. Instead of patching the numbers, I went down to the raw EtherCAT bytes and found the decoding error.</li>
+      <li>Fixed the driver, then built a 3×3 calibration.</li>
+      <li>Validated it on an independent dataset: mean error dropped from 2.77&nbsp;N to 0.69&nbsp;N.</li>
+    </ul>
+    <div class="gallery" style="margin-top:18px">
+      <img loading="lazy" src="assets/img/citius-schunk.jpg" alt="Sensor and gripper on the UR5e">
+      <img loading="lazy" src="assets/img/citius-rs8.jpg" alt="UR5e cell">
+    </div>
+    <div class="btns" style="margin-top:20px"><a class="btn" href="https://github.com/mohamedalijomaaghouil/robota-sudoe-hex-e-v2" target="_blank" rel="noopener">Code on GitHub ↗</a></div>
+  </div>
+</dialog>
+
+<dialog id="dlg-inspection" aria-label="Robotic defect inspection">
+  <div class="d-head"><span class="meta">SIGMA Clermont · EU project REMAIN-SUDOE · 2025–26</span><button class="icon-btn" data-close aria-label="Close">✕</button></div>
+  <div class="d-body">
+    <h3>Robotic defect inspection with a UR3e</h3>
+    <p class="sub">Semester 7–8 team project (3 students), ranked 2nd of 93. A UR3e with an Intel RealSense camera photographs a shoe from several angles to detect defects.</p>
+    <h4>My part: where is the part?</h4>
+    <ul>
+      <li>3D localisation of the part from aligned colour and depth images: separate the floor with a depth threshold, morphological filtering, contours with OpenCV.</li>
+      <li>Compute the part's position and orientation and project it to 3D, in a ROS&nbsp;2 node (Python).</li>
+      <li>A live annotated control image (bounding box, distance, orientation) to follow the inspection.</li>
+    </ul>
+    <p class="note">My teammates handled motion planning, simulation and the deep-learning defect detection.</p>
+    <div class="gallery" style="margin-top:18px">
+      <img loading="lazy" src="assets/img/inspection-2473.jpg" alt="UR3e above a shoe">
+      <img loading="lazy" src="assets/img/inspection-2474.jpg" alt="Inspection cell">
+      <img loading="lazy" src="assets/img/inspection-2475.jpg" alt="UR3e with RealSense camera above the shoe">
+      <img loading="lazy" src="assets/img/sigma-ros.jpg" alt="First ROS lab at SIGMA Clermont">
+    </div>
+    <div class="btns" style="margin-top:20px"><a class="btn" href="https://github.com/mohamedalijomaaghouil/defect-detection-robotics" target="_blank" rel="noopener">Code on GitHub ↗</a></div>
+  </div>
+</dialog>
+
+<dialog id="dlg-followme" aria-label="FOLLOW-ME robot">
+  <div class="d-head"><span class="meta">ENISo · 2nd-year project · Jan – May 2025</span><button class="icon-btn" data-close aria-label="Close">✕</button></div>
+  <div class="d-body">
+    <h3>FOLLOW-ME: a person-following robot</h3>
+    <p class="sub">Team of 3. A mobile robot that detects a person, starts following on a raised hand, and keeps a safe distance.</p>
+    <video controls preload="none" poster="assets/img/poster-followme.jpg" src="assets/video/followme.mp4"></video>
+    <div class="stat-row">
+      <div class="stat"><b>2 m ± 0.1</b><span>following distance</span></div>
+      <div class="stat"><b>~20 fps</b><span>processing rate</span></div>
+    </div>
+    <h4>How it works</h4>
+    <ul>
+      <li>MediaPipe finds the shoulders; their midpoint gives the torso position. An Intel RealSense D435i gives its distance.</li>
+      <li>A hand gesture starts and stops the tracking; the robot stops safely if the person leaves the field of view.</li>
+      <li>Linear and angular speeds (Vx, Wz) are sent to the base over Modbus TCP.</li>
+    </ul>
+    <div class="btns" style="margin-top:20px">
+      <a class="btn" href="https://github.com/mohamedalijomaaghouil/follow-me-person-following-robot" target="_blank" rel="noopener">Code on GitHub ↗</a>
+      <a class="btn" href="https://youtu.be/bcdjbf4g2AU" target="_blank" rel="noopener">YouTube ↗</a>
+    </div>
+  </div>
+</dialog>
+
+<dialog id="dlg-arduino" aria-label="Arduino robot">
+  <div class="d-head"><span class="meta">ENISo Team · 2023–24</span><button class="icon-btn" data-close aria-label="Close">✕</button></div>
+  <div class="d-body">
+    <h3>Where it started: a 4-wheel Arduino robot</h3>
+    <p class="sub">First tutorial of ENISo Team, the school's robotics club: a four-wheeled robot built from scratch around an Arduino Uno.</p>
+    <video controls preload="none" poster="assets/img/poster-enisoteam-robot.jpg" src="assets/video/enisoteam-robot.mp4" style="max-height:70dvh;width:auto;margin:auto"></video>
+  </div>
+</dialog>
+
+<dialog id="lightbox" aria-label="Media viewer">
+  <div class="d-head"><span class="meta" id="lbCap"></span><button class="icon-btn" data-close aria-label="Close">✕</button></div>
+  <div id="lbBody"></div>
+</dialog>
+
+<script>
+(() => {
+  const root = document.documentElement;
+  root.classList.add("js");
+  try { const t = localStorage.getItem("theme"); if (t) root.dataset.theme = t; } catch (e) {}
+  document.getElementById("themeBtn").addEventListener("click", () => {
+    const next = root.dataset.theme === "light" ? "dark" : "light";
+    root.dataset.theme = next;
+    try { localStorage.setItem("theme", next); } catch (e) {}
+  });
+
+  // dialogs
+  const stopMedia = d => d.querySelectorAll("video").forEach(v => v.pause());
+  document.querySelectorAll("[data-open]").forEach(b =>
+    b.addEventListener("click", () => document.getElementById(b.dataset.open).showModal()));
+  document.querySelectorAll("dialog").forEach(d => {
+    d.addEventListener("click", e => { if (e.target === d || e.target.closest("[data-close]")) d.close(); });
+    d.addEventListener("close", () => stopMedia(d));
+  });
+
+  // lightbox
+  const lb = document.getElementById("lightbox"), lbBody = document.getElementById("lbBody");
+  document.querySelectorAll("[data-lightbox]").forEach(b => b.addEventListener("click", () => {
+    const src = b.dataset.lightbox;
+    lbBody.innerHTML = src.endsWith(".mp4")
+      ? `<video controls autoplay playsinline src="${src}"></video>`
+      : `<img src="${src}" alt="${b.querySelector("img")?.alt || ""}">`;
+    document.getElementById("lbCap").textContent = b.dataset.cap || "";
+    lb.showModal();
+  }));
+  lb.addEventListener("close", () => { lbBody.innerHTML = ""; });
+
+  // card preview videos: load and play only while visible
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const vio = new IntersectionObserver(entries => entries.forEach(({target: v, isIntersecting}) => {
+    if (isIntersecting) {
+      if (!v.src) v.src = v.dataset.src;
+      if (!reduce) v.play().catch(() => {});
+    } else v.pause();
+  }), {threshold: .35});
+  document.querySelectorAll("video[data-src]").forEach(v => vio.observe(v));
+
+  // reveal on scroll
+  const rio = new IntersectionObserver(entries => entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add("in"); rio.unobserve(e.target); }
+  }), {threshold: .12});
+  document.querySelectorAll(".reveal").forEach(el => rio.observe(el));
+
+  // copy email
+  document.getElementById("copyMail").addEventListener("click", async e => {
+    try {
+      await navigator.clipboard.writeText(document.getElementById("mail").textContent);
+      e.currentTarget.textContent = "✓";
+    } catch (err) {}
+  });
+})();
+</script>
+</body>
+</html>
