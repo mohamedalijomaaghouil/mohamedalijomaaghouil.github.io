@@ -2448,13 +2448,8 @@
             >
           </div>
           <div class="btns">
-            <button class="btn primary" data-open="dlg-videocv">
-              <svg viewBox="0 0 24 24" fill="currentColor">
-                <path d="M8 5v14l11-7z" /></svg
-              >Watch my 90-second intro
-            </button>
             <a
-              class="btn"
+              class="btn primary"
               href="assets/docs/CV_JomaaGhouil.pdf"
               target="_blank"
               rel="noopener"
@@ -3266,14 +3261,26 @@
           Robotics, computer vision or industrial AI team with a PFE from March
           2027? I'd be glad to hear about it.
         </p>
-        <div class="contact-interactive" id="contactInteractive">
+        <p class="videocv-note">
+          <button class="btn" type="button" data-open="dlg-videocv">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M8 5v14l11-7z" /></svg
+            >Watch my video CV (1 min 26)
+          </button>
+          <br /><small
+            >Recorded at SIGMA Clermont during semester 7 (2025–26), when I was
+            looking for a 4-month internship. Today I'm in my final year,
+            looking for a 6-month PFE.</small
+          >
+        </p>
+        <div class="contact-interactive is-open" id="contactInteractive">
           <button
             class="robot-trigger"
             id="robotTrigger"
             type="button"
             aria-controls="contactDetails"
-            aria-expanded="false"
-            aria-label="Reveal contact information"
+            aria-expanded="true"
+            aria-label="Hide contact information"
           >
             <span class="modelViewPort" aria-hidden="true">
               <span class="eva">
@@ -3289,7 +3296,7 @@
               </span>
             </span>
             <span class="robot-hint"
-              >Hover, tap or press Enter to reveal my contact details ↗</span
+              >Say hi to the robot 👋 — my contact details are right here</span
             >
           </button>
           <div class="contact-details" id="contactDetails">
@@ -3372,9 +3379,9 @@
 
     <!-- ============ DIALOGS ============ -->
 
-    <dialog id="dlg-videocv" aria-label="Video introduction">
+    <dialog id="dlg-videocv" aria-label="Video CV">
       <div class="d-head">
-        <span class="meta">Video CV · SIGMA Clermont · 1 min 26</span
+        <span class="meta">Video CV · SIGMA Clermont · semester 7 (2025–26) · 1 min 26</span
         ><button class="icon-btn" data-close aria-label="Close">✕</button>
       </div>
       <div class="d-body">
@@ -3692,8 +3699,7 @@
         const nav = document.querySelector(".nav");
         let isTransitioning = false;
 
-        // The welcome loader runs for 5 seconds on entry, and transitions for 3.
-        // Reduced-motion users can navigate immediately instead of waiting.
+        // Short welcome loader on entry (0.6 s, click to skip); navigation is instant.
         function showLoader(title, caption) {
           loaderTitle.textContent = title;
           loaderCaption.textContent = caption;
@@ -3711,10 +3717,7 @@
         async function transitionTo(action, label = "Loading...") {
           if (isTransitioning) return;
           isTransitioning = true;
-          showLoader(label, "Preparing your next view");
           try {
-            if (!reduceMotion) await wait(3000);
-            hideLoader();
             action();
           } finally {
             hideLoader();
@@ -3742,8 +3745,12 @@
             for (let i = 0; i < typingParts.length; i++) {
               const { el, parts } = typingParts[i];
               el.classList.add("is-typing");
-              const delay = [36, 32, 17, 11][i];
+              const delay = [14, 12, 6][i];
               for (const { node, text } of parts) {
+                if (delay === undefined) {
+                  node.nodeValue = text;
+                  continue;
+                }
                 for (const char of text) {
                   node.nodeValue += char;
                   await wait(delay);
@@ -3757,13 +3764,15 @@
         }
 
         showLoader("Welcome.", "Entering Mohamed Ali's portfolio");
-        window.setTimeout(
-          () => {
-            hideLoader();
-            typeIntro();
-          },
-          reduceMotion ? 200 : 5000,
-        );
+        let introStarted = false;
+        const startIntro = () => {
+          if (introStarted) return;
+          introStarted = true;
+          hideLoader();
+          typeIntro();
+        };
+        loader.addEventListener("click", startIntro);
+        window.setTimeout(startIntro, reduceMotion ? 0 : 600);
 
         // Give all existing CTA buttons the requested Uiverse animated text wrapper.
         document.querySelectorAll(".btn").forEach((btn) => {
