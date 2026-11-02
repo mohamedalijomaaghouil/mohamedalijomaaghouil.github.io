@@ -2784,13 +2784,17 @@
             <button
               class="play"
               data-lightbox="assets/video/jeeniso-reel-1.mp4"
-              data-cap="JEENISo Instagram reel"
+              data-cap="JEENISo Instagram reel: presenting the External Affairs pole"
             >
-              <img
-                loading="lazy"
-                src="assets/img/poster-jeeniso-reel-1.jpg"
-                alt="JEENISo reel"
-              />
+              <video
+                muted
+                loop
+                playsinline
+                preload="none"
+                poster="assets/img/poster-jeeniso-reel-1.jpg"
+                data-src="assets/video/jeeniso-reel-1-loop.mp4"
+                aria-label="JEENISo reel: presenting the External Affairs pole"
+              ></video>
             </button>
             <button
               class="play"
@@ -2839,6 +2843,44 @@
                 src="assets/img/fcee13.jpg"
                 alt="At FCEE'13"
               />
+            </button>
+          </div>
+        </article>
+
+        <article class="lead-card reveal">
+          <div>
+            <h3>In my own words: video CV</h3>
+            <p class="org">Recorded at SIGMA Clermont · semester 7 (2025–26) · 1 min 26</p>
+            <ul>
+              <li>
+                My path from ENISo to SIGMA Clermont, my projects, and what the
+                junior enterprise and the forum taught me.
+              </li>
+              <li>
+                Recorded when I was looking for a 4-month internship. Today I'm
+                in my final year, looking for a <strong>6-month PFE</strong>.
+              </li>
+            </ul>
+          </div>
+          <div
+            class="mosaic"
+            style="grid-template-columns: minmax(0, 1fr); justify-content: end"
+          >
+            <button
+              class="play"
+              type="button"
+              data-open="dlg-videocv"
+              style="aspect-ratio: 16 / 9"
+              aria-label="Play my video CV with sound"
+            >
+              <video
+                muted
+                loop
+                playsinline
+                preload="none"
+                poster="assets/img/poster-video-cv-loop.jpg"
+                data-src="assets/video/video-cv-loop.mp4"
+              ></video>
             </button>
           </div>
         </article>
@@ -3260,18 +3302,6 @@
         <p>
           Robotics, computer vision or industrial AI team with a PFE from March
           2027? I'd be glad to hear about it.
-        </p>
-        <p class="videocv-note">
-          <button class="btn" type="button" data-open="dlg-videocv">
-            <svg viewBox="0 0 24 24" fill="currentColor">
-              <path d="M8 5v14l11-7z" /></svg
-            >Watch my video CV (1 min 26)
-          </button>
-          <br /><small
-            >Recorded at SIGMA Clermont during semester 7 (2025–26), when I was
-            looking for a 4-month internship. Today I'm in my final year,
-            looking for a 6-month PFE.</small
-          >
         </p>
         <div class="contact-interactive is-open" id="contactInteractive">
           <button
