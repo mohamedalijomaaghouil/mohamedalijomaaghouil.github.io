@@ -2341,6 +2341,313 @@
           visibility: visible;
         }
       }
+      /* ===== Highlights: 2x2 quad, click a frame to expand it ===== */
+      .quad {
+        --gap: 10px;
+        position: relative;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
+        gap: var(--gap);
+        aspect-ratio: 16 / 10;
+        transition:
+          grid-template-columns 0.75s cubic-bezier(0.7, 0, 0.2, 1),
+          grid-template-rows 0.75s cubic-bezier(0.7, 0, 0.2, 1),
+          gap 0.75s cubic-bezier(0.7, 0, 0.2, 1);
+      }
+      .quad[data-active] {
+        gap: 0px;
+      }
+      .quad[data-active="0"] {
+        grid-template-columns: 1fr 0fr;
+        grid-template-rows: 1fr 0fr;
+      }
+      .quad[data-active="1"] {
+        grid-template-columns: 0fr 1fr;
+        grid-template-rows: 1fr 0fr;
+      }
+      .quad[data-active="2"] {
+        grid-template-columns: 1fr 0fr;
+        grid-template-rows: 0fr 1fr;
+      }
+      .quad[data-active="3"] {
+        grid-template-columns: 0fr 1fr;
+        grid-template-rows: 0fr 1fr;
+      }
+      .q-tile {
+        position: relative;
+        min-width: 0;
+        min-height: 0;
+        overflow: hidden;
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        background: #000;
+        padding: 0;
+        color: #fff;
+        font: inherit;
+        text-align: left;
+        cursor: pointer;
+        isolation: isolate;
+        transition:
+          border-color 0.3s,
+          box-shadow 0.3s,
+          opacity 0.5s,
+          border-radius 0.75s;
+      }
+      .q-tile::before {
+        /* blurred poster behind portrait reels when expanded */
+        content: "";
+        position: absolute;
+        inset: -20px;
+        background: var(--poster) center / cover;
+        filter: blur(24px) brightness(0.45);
+        z-index: -1;
+      }
+      .q-tile video {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transform: scale(1.04);
+        transition:
+          transform 0.9s cubic-bezier(0.2, 0.7, 0.2, 1),
+          filter 0.4s;
+        filter: saturate(0.85);
+      }
+      .q-tile:hover video,
+      .q-tile:focus-visible video {
+        transform: scale(1.09);
+        filter: saturate(1.1);
+      }
+      .q-tile:hover,
+      .q-tile:focus-visible {
+        border-color: var(--accent);
+        box-shadow: 0 0 0 1px var(--accent),
+          0 18px 40px -18px color-mix(in srgb, var(--accent) 60%, transparent);
+        outline: none;
+      }
+      .q-label {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        padding: 28px 14px 12px;
+        background: linear-gradient(transparent, rgba(0, 0, 0, 0.82));
+        transition:
+          opacity 0.35s,
+          transform 0.35s;
+      }
+      .q-label small {
+        display: block;
+        font-family: var(--mono);
+        font-size: 11px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: #68e1b4;
+      }
+      .q-label strong {
+        font-size: 15px;
+        line-height: 1.25;
+      }
+      .q-play {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        width: 34px;
+        height: 34px;
+        border-radius: 50%;
+        display: grid;
+        place-items: center;
+        background: rgba(0, 0, 0, 0.55);
+        border: 1px solid rgba(255, 255, 255, 0.25);
+        transition: transform 0.3s, background 0.3s;
+      }
+      .q-tile:hover .q-play {
+        transform: scale(1.12);
+        background: #68e1b4;
+        color: #06261b;
+      }
+      /* expanded state */
+      .quad[data-active] .q-tile:not(.is-active) {
+        opacity: 0;
+        pointer-events: none;
+      }
+      .q-tile.is-active {
+        cursor: default;
+        border-radius: 18px;
+        border-color: var(--accent);
+      }
+      .q-tile.is-active video {
+        object-fit: contain;
+        transform: none;
+        filter: none;
+      }
+      .q-tile.is-active .q-label,
+      .q-tile.is-active .q-play {
+        opacity: 0;
+        transform: translateY(8px);
+        pointer-events: none;
+      }
+      .q-bar {
+        position: absolute;
+        top: 12px;
+        right: 12px;
+        z-index: 3;
+        display: flex;
+        gap: 8px;
+        opacity: 0;
+        transform: translateY(-6px);
+        pointer-events: none;
+        transition:
+          opacity 0.3s 0.45s,
+          transform 0.3s 0.45s;
+      }
+      .quad[data-active] .q-bar {
+        opacity: 1;
+        transform: none;
+        pointer-events: auto;
+      }
+      .q-bar button {
+        height: 34px;
+        padding: 0 12px;
+        border-radius: 999px;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        background: rgba(0, 0, 0, 0.6);
+        color: #fff;
+        font: 500 13px var(--sans);
+        cursor: pointer;
+        backdrop-filter: blur(6px);
+      }
+      .q-bar button:hover {
+        background: #68e1b4;
+        color: #06261b;
+      }
+      .q-caption {
+        position: absolute;
+        left: 14px;
+        top: 12px;
+        z-index: 3;
+        max-width: 60%;
+        font-family: var(--mono);
+        font-size: 12px;
+        color: #fff;
+        background: rgba(0, 0, 0, 0.6);
+        padding: 6px 10px;
+        border-radius: 8px;
+        opacity: 0;
+        transition: opacity 0.3s 0.45s;
+        pointer-events: none;
+      }
+      .quad[data-active] .q-caption {
+        opacity: 1;
+      }
+      /* entrance: frames slide in from their corner */
+      .js .quad.reveal {
+        opacity: 1;
+        transform: none;
+      }
+      .js .quad.reveal:not(.in) .q-tile {
+        opacity: 0;
+      }
+      .js .quad.reveal.in .q-tile {
+        animation: q-in 0.85s cubic-bezier(0.2, 0.8, 0.2, 1) var(--d) backwards;
+      }
+      @keyframes q-in {
+        from {
+          opacity: 0;
+          transform: translate(var(--fx), var(--fy)) scale(0.9);
+          filter: blur(6px);
+        }
+      }
+      .q-tile:nth-child(1) { --fx: -28px; --fy: -28px; --d: 0s; }
+      .q-tile:nth-child(2) { --fx: 28px; --fy: -28px; --d: 0.1s; }
+      .q-tile:nth-child(3) { --fx: -28px; --fy: 28px; --d: 0.2s; }
+      .q-tile:nth-child(4) { --fx: 28px; --fy: 28px; --d: 0.3s; }
+      /* photo slideshow tile (Ken Burns cross-fade, 6 slides x 4 s) */
+      .q-slides figure {
+        position: absolute;
+        inset: 0;
+        margin: 0;
+        opacity: 0;
+        animation: q-fade 24s linear infinite;
+        animation-delay: calc(var(--i) * 4s - 0.01s);
+      }
+      .q-slides figure:first-of-type {
+        opacity: 1;
+      }
+      .q-slides img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        animation: q-zoom 24s linear infinite;
+        animation-delay: inherit;
+        transform-origin: var(--ox, 50%) 40%;
+      }
+      .q-slides figure:nth-of-type(even) img {
+        --ox: 30%;
+      }
+      .q-slides figcaption {
+        position: absolute;
+        left: 14px;
+        bottom: 14px;
+        font-family: var(--mono);
+        font-size: 12px;
+        background: rgba(0, 0, 0, 0.6);
+        padding: 6px 10px;
+        border-radius: 8px;
+        opacity: 0;
+        transition: opacity 0.3s 0.45s;
+      }
+      .q-slides.is-active figcaption {
+        opacity: 1;
+      }
+      .q-slides::before {
+        display: none;
+      }
+      @keyframes q-fade {
+        0% { opacity: 0; }
+        4% { opacity: 1; }
+        17% { opacity: 1; }
+        21% { opacity: 0; }
+        100% { opacity: 0; }
+      }
+      @keyframes q-zoom {
+        0% { transform: scale(1.02); }
+        21% { transform: scale(1.14); }
+        100% { transform: scale(1.14); }
+      }
+      .q-row-label {
+        display: flex;
+        justify-content: space-between;
+        font-family: var(--mono);
+        font-size: 12px;
+        color: var(--faint);
+        margin: 10px 2px 0;
+      }
+      @media (max-width: 640px) {
+        .quad {
+          aspect-ratio: 4 / 5;
+          --gap: 8px;
+        }
+        .q-label strong {
+          font-size: 13px;
+        }
+        .q-label {
+          padding: 20px 10px 8px;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .quad,
+        .q-tile,
+        .q-tile video {
+          transition: none !important;
+        }
+        .q-slides figure,
+        .q-slides img {
+          animation: none !important;
+        }
+      }
     </style>
   </head>
   <body>
@@ -2376,6 +2683,7 @@
       <div class="wrap">
         <a class="brand" href="#top">Mohamed Ali Jomaa Ghouil</a>
         <ul id="primaryNav">
+          <li><a href="#highlights">Highlights</a></li>
           <li><a href="#projects">Projects</a></li>
           <li><a href="#experience">Experience</a></li>
           <li><a href="#leadership">Leadership</a></li>
@@ -2487,6 +2795,80 @@
           height="900"
         />
       </header>
+
+      <!-- HIGHLIGHTS: 2x2 quad -->
+      <section id="highlights">
+        <p class="kicker">Highlights</p>
+        <h2>Robots on top, people below</h2>
+        <div class="quad reveal" id="quad">
+          <button
+            class="q-tile"
+            style="--poster: url(assets/img/poster-citius-demo.jpg)"
+            data-full="assets/video/citius-demo.mp4"
+            data-loop="assets/video/citius-demo-loop.mp4"
+            data-caption="CiTIUS · UR5e admittance control, teach &amp; replay"
+            aria-label="Play: UR5e taught by hand at CiTIUS"
+          >
+            <video muted loop playsinline preload="none"
+              poster="assets/img/poster-citius-demo.jpg"
+              data-src="assets/video/citius-demo-loop.mp4"></video>
+            <span class="q-play" aria-hidden="true">▶</span>
+            <span class="q-label"><small>01 · Robotics · CiTIUS</small
+              ><strong>Teach a UR5e by hand, replay it exactly</strong></span>
+          </button>
+          <button
+            class="q-tile"
+            style="--poster: url(assets/img/poster-followme.jpg)"
+            data-full="assets/video/followme.mp4"
+            data-loop="assets/video/followme-loop.mp4"
+            data-caption="FOLLOW-ME · person following with vision + depth"
+            aria-label="Play: FOLLOW-ME robot"
+          >
+            <video muted loop playsinline preload="none"
+              poster="assets/img/poster-followme.jpg"
+              data-src="assets/video/followme-loop.mp4"></video>
+            <span class="q-play" aria-hidden="true">▶</span>
+            <span class="q-label"><small>02 · Robotics · FOLLOW-ME</small
+              ><strong>A robot that follows a person</strong></span>
+          </button>
+          <button
+            class="q-tile q-slides"
+            data-caption="Soft skills · teamwork, clients, public speaking"
+            aria-label="Open: soft-skills photo slideshow"
+          >
+            <figure style="--i: 0"><img src="assets/img/acs-1.jpg" alt="Presenting the final project at American Corner Sousse" /><figcaption>American Corner Sousse × AMIDEAST · final project pitch</figcaption></figure>
+            <figure style="--i: 1"><img loading="lazy" src="assets/img/jeeniso-team.jpg" alt="JEENISo team at JET'XPO" /><figcaption>JEENISo team at JET'XPO 2023-24</figcaption></figure>
+            <figure style="--i: 2"><img loading="lazy" src="assets/img/acs-2.jpg" alt="Team work at American Corner Sousse" /><figcaption>Fundamental Competencies Program · project work</figcaption></figure>
+            <figure style="--i: 3"><img loading="lazy" src="assets/img/jetxpo-2.jpg" alt="JET'XPO 2023-24" /><figcaption>JET'XPO, national junior-enterprise fair, Tunis</figcaption></figure>
+            <figure style="--i: 4"><img loading="lazy" src="assets/img/acs-3.jpg" alt="Brainstorming wall at American Corner Sousse" /><figcaption>Creative &amp; critical thinking workshop</figcaption></figure>
+            <figure style="--i: 5"><img loading="lazy" src="assets/img/jeeniso-integration.jpg" alt="JEENISo integration day" /><figcaption>JEENISo, Junior Enterprise of ENISo</figcaption></figure>
+            <span class="q-play" aria-hidden="true">⤢</span>
+            <span class="q-label"><small>03 · People · Teams &amp; events</small
+              ><strong>JEENISo, JET'XPO, American Corner</strong></span>
+          </button>
+          <button
+            class="q-tile"
+            style="--poster: url(assets/img/poster-video-cv.jpg)"
+            data-full="assets/video/video-cv.mp4"
+            data-loop="assets/video/video-cv-loop.mp4"
+            data-caption="Video CV · meet me in 90 seconds"
+            aria-label="Play: video CV"
+          >
+            <video muted loop playsinline preload="none"
+              poster="assets/img/poster-video-cv-loop.jpg"
+              data-src="assets/video/video-cv-loop.mp4"></video>
+            <span class="q-play" aria-hidden="true">▶</span>
+            <span class="q-label"><small>04 · People · Video CV</small
+              ><strong>Meet me in 90 seconds</strong></span>
+          </button>
+          <span class="q-caption" id="quadCaption"></span>
+          <div class="q-bar">
+            <button type="button" id="quadNext">Next →</button>
+            <button type="button" id="quadClose" aria-label="Close">✕ Close</button>
+          </div>
+        </div>
+        <p class="q-row-label"><span>Click a frame to open it</span><span>Esc to go back</span></p>
+      </section>
 
       <!-- PROJECTS -->
       <section id="projects">
@@ -2885,6 +3267,50 @@
           </div>
         </article>
 
+        <article class="lead-card reveal">
+          <div>
+            <h3>Fundamental Competencies Program</h3>
+            <p class="org">
+              American Corner Sousse × AMIDEAST Sousse · 40 hours · 2025
+            </p>
+            <ul>
+              <li>
+                Intensive 40-hour program facilitated by Ms. Narjess Hachena,
+                built on <strong>project-based learning</strong>.
+              </li>
+              <li>
+                Four core competencies:
+                <strong>communication, creative thinking, critical thinking
+                and problem solving</strong>.
+              </li>
+              <li>
+                Worked in a team on a project and presented it to the group
+                at the end of the program.
+              </li>
+            </ul>
+          </div>
+          <div class="mosaic">
+            <button
+              data-lightbox="assets/img/acs-1.jpg"
+              data-cap="Final presentation, American Corner Sousse"
+            >
+              <img loading="lazy" src="assets/img/acs-1.jpg" style="object-position: 12% 50%" alt="Final presentation at American Corner Sousse" />
+            </button>
+            <button
+              data-lightbox="assets/img/acs-2.jpg"
+              data-cap="Team work, Fundamental Competencies Program"
+            >
+              <img loading="lazy" src="assets/img/acs-2.jpg" alt="Team work session" />
+            </button>
+            <button
+              data-lightbox="assets/img/acs-3.jpg"
+              data-cap="Brainstorming wall, American Corner Sousse"
+            >
+              <img loading="lazy" src="assets/img/acs-3.jpg" alt="Brainstorming wall" />
+            </button>
+          </div>
+        </article>
+
         <div class="mini">
           <article class="lead-card reveal">
             <h3>ENISo Team</h3>
@@ -3060,7 +3486,14 @@
                 <span class="cert-name">AI for Predictive Maintenance</span
                 ><span class="cert-date">2025 · Certificate</span>
               </a>
-              <div class="cert-face" style="--index: 3; --cert-color: #ed4343">
+              <a
+                class="cert-face"
+                style="--index: 3; --cert-color: #ed4343"
+                href="assets/docs/cswa-certificate.jpg"
+                target="_blank"
+                rel="noopener"
+                aria-label="SOLIDWORKS CSWA, view certificate"
+              >
                 <span class="cert-logo-frame"
                   ><img
                     class="cert-logo"
@@ -3069,9 +3502,16 @@
                     loading="lazy" /></span
                 ><span class="cert-brand"><b>Dassault Systèmes</b></span>
                 <span class="cert-name">SOLIDWORKS CSWA</span
-                ><span class="cert-date">2025 · Certification</span>
-              </div>
-              <div class="cert-face" style="--index: 4; --cert-color: #3c9ed9">
+                ><span class="cert-date">Feb 2025 · Certification</span>
+              </a>
+              <a
+                class="cert-face"
+                style="--index: 4; --cert-color: #3c9ed9"
+                href="assets/docs/toeic-certificate.jpg"
+                target="_blank"
+                rel="noopener"
+                aria-label="TOEIC 955 / 990, view certificate"
+              >
                 <span class="cert-logo-frame"
                   ><img
                     class="cert-logo"
@@ -3081,8 +3521,8 @@
                 ><span class="cert-brand"><b>TOEIC</b></span>
                 <span class="cert-name"
                   >English proficiency · 955 / 990 (C1)</span
-                ><span class="cert-date">Language assessment</span>
-              </div>
+                ><span class="cert-date">Jul 2025 · AMIDEAST Sousse</span>
+              </a>
               <a
                 class="cert-face"
                 style="--index: 5; --cert-color: #e3ac54"
@@ -3772,22 +4212,36 @@
         });
         async function typeIntro() {
           if (!reduceMotion) {
+            // Time-based typing (~3 s in total, bio included): each line gets a fixed
+            // duration, so the speed does not depend on timer precision.
+            const durations = [380, 560, 620, 1300];
+            const frame = () =>
+              new Promise((resolve) => requestAnimationFrame(resolve));
             for (let i = 0; i < typingParts.length; i++) {
               const { el, parts } = typingParts[i];
               el.classList.add("is-typing");
-              const delay = [14, 12, 6][i];
-              for (const { node, text } of parts) {
-                if (delay === undefined) {
-                  node.nodeValue = text;
-                  continue;
-                }
-                for (const char of text) {
-                  node.nodeValue += char;
-                  await wait(delay);
-                }
+              const chars = parts.map(({ text }) => Array.from(text));
+              const total = chars.reduce((n, c) => n + c.length, 0);
+              const duration = durations[i] ?? 600;
+              const start = performance.now();
+              let shown = -1;
+              while (shown < total) {
+                await frame();
+                const target = Math.min(
+                  total,
+                  Math.ceil(((performance.now() - start) / duration) * total),
+                );
+                if (target === shown) continue;
+                shown = target;
+                let left = shown;
+                parts.forEach(({ node }, k) => {
+                  const take = Math.min(left, chars[k].length);
+                  node.nodeValue = chars[k].slice(0, take).join("");
+                  left -= take;
+                });
               }
               el.classList.remove("is-typing");
-              await wait(80);
+              await wait(90);
             }
           }
           intro.classList.add("intro-ready");
@@ -3975,6 +4429,74 @@
             String(contact.classList.contains("is-open")),
           );
         });
+
+        // Highlights quad: click a frame -> it grows to fill the grid with the full video.
+        const quad = document.getElementById("quad");
+        if (quad) {
+          const tiles = [...quad.querySelectorAll(".q-tile")];
+          const caption = document.getElementById("quadCaption");
+          const toLoop = (tile) => {
+            const v = tile.querySelector("video");
+            if (!v || v.dataset.mode !== "full") return;
+            v.dataset.mode = "loop";
+            v.controls = false;
+            v.muted = true;
+            v.loop = true;
+            v.src = tile.dataset.loop;
+            if (!reduceMotion) v.play().catch(() => {});
+          };
+          const open = (i) => {
+            tiles.forEach((t, k) => {
+              t.classList.toggle("is-active", k === i);
+              if (k !== i) toLoop(t);
+            });
+            quad.dataset.active = String(i);
+            caption.textContent = tiles[i].dataset.caption;
+            const v = tiles[i].querySelector("video");
+            if (!v) return;
+            v.dataset.mode = "full";
+            v.src = tiles[i].dataset.full;
+            v.loop = false;
+            v.muted = false;
+            v.controls = true;
+            v.currentTime = 0;
+            v.play().catch(() => {
+              v.muted = true;
+              v.play().catch(() => {});
+            });
+          };
+          const close = () => {
+            if (quad.dataset.active === undefined) return;
+            const t = tiles[Number(quad.dataset.active)];
+            delete quad.dataset.active;
+            t.classList.remove("is-active");
+            toLoop(t);
+            t.focus({ preventScroll: true });
+          };
+          tiles.forEach((t, i) =>
+            t.addEventListener("click", (e) => {
+              if (t.classList.contains("is-active")) return;
+              e.preventDefault();
+              open(i);
+            }),
+          );
+          document.getElementById("quadClose").addEventListener("click", close);
+          document.getElementById("quadNext").addEventListener("click", () =>
+            open((Number(quad.dataset.active ?? -1) + 1) % tiles.length),
+          );
+          document.addEventListener("keydown", (e) => {
+            if (quad.dataset.active === undefined) return;
+            if (document.querySelector("dialog[open]")) return;
+            if (e.key === "Escape") close();
+            if (e.key === "ArrowRight")
+              open((Number(quad.dataset.active) + 1) % tiles.length);
+            if (e.key === "ArrowLeft")
+              open((Number(quad.dataset.active) + 3) % tiles.length);
+          });
+          tiles.forEach((t) =>
+            t.querySelector("video")?.addEventListener("ended", () => close()),
+          );
+        }
 
         // Load preview videos only when visible, and avoid autoplay for reduced motion.
         if ("IntersectionObserver" in window) {
