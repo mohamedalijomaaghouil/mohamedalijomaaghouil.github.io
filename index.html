@@ -2715,6 +2715,13 @@
       .ch-table summary { cursor: pointer; }
       .ch-table table { border-collapse: collapse; margin-top: 8px; font-variant-numeric: tabular-nums; }
       .ch-table th, .ch-table td { text-align: left; padding: 4px 14px 4px 0; border-bottom: 1px solid var(--line); }
+      /* ===== pipeline steps (inspection dialog) ===== */
+      ol.pipe { list-style: none; counter-reset: st; padding: 0; margin: 10px 0 14px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+      ol.pipe li { counter-increment: st; background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; font-size: 13.5px; color: var(--muted); display: flex; flex-direction: column; gap: 3px; }
+      ol.pipe li::before { content: counter(st, decimal-leading-zero); font: 600 11px var(--mono); color: var(--accent); }
+      ol.pipe li b { color: var(--text); font-size: 14px; }
+      @media (max-width: 640px) { ol.pipe { grid-template-columns: 1fr 1fr; } }
+      @media (max-width: 380px) { ol.pipe { grid-template-columns: 1fr; } }
     </style>
   </head>
   <body>
@@ -3007,11 +3014,15 @@
           <div class="pcard reveal">
           <button class="card" data-open="dlg-inspection">
             <div class="media">
-              <img
-                loading="lazy"
-                src="assets/img/inspection-2473.jpg"
-                alt="UR3e robot inspecting a shoe at SIGMA Clermont"
-              />
+              <video
+                muted
+                loop
+                playsinline
+                preload="none"
+                poster="assets/img/poster-localization-loop.jpg"
+                data-src="assets/video/localization-loop.mp4"
+                aria-label="Shoe localization node running on the real camera"
+              ></video>
             </div>
             <div class="body">
               <div class="meta">
@@ -4049,17 +4060,28 @@
           robotics sub-team of 3. A UR3e with an Intel RealSense camera
           photographs a shoe from several angles to detect defects.
         </p>
-        <h4>My part: where is the part?</h4>
+        <h4>My part: where is the shoe?</h4>
+        <video
+          controls
+          preload="none"
+          poster="assets/img/poster-localization-demo.jpg"
+          src="assets/video/localization-demo.mp4"
+        ></video>
+        <p class="note">
+          My localization node live on the real RealSense camera (13 March
+          2026): as the shoe is moved and turned, the log updates its pixel
+          position, distance and yaw.
+        </p>
+        <h4>How the node works</h4>
+        <ol class="pipe">
+          <li><b>Table depth</b><span>median of the bottom of the depth image</span></li>
+          <li><b>Segment</b><span>keep pixels at least 3&nbsp;cm closer than the table</span></li>
+          <li><b>Clean</b><span>morphological opening; reject blobs too small, too large or touching the border</span></li>
+          <li><b>Pose in the image</b><span>largest valid contour → minimum-area rectangle → centre (u,&nbsp;v) and yaw</span></li>
+          <li><b>To 3D</b><span>median depth around the centre, pinhole back-projection → X, Y, Z in metres</span></li>
+          <li><b>Publish</b><span>JSON on <code>/shoe_pose</code> in ROS&nbsp;2, or <code>present: false</code> if nothing is found</span></li>
+        </ol>
         <ul>
-          <li>
-            3D localisation of the part from aligned colour and depth images:
-            separate the floor with a depth threshold, morphological filtering,
-            contours with OpenCV.
-          </li>
-          <li>
-            Compute the part's position and orientation and project it to 3D, in
-            a ROS&nbsp;2 node (Python).
-          </li>
           <li>
             A live annotated control image (bounding box, distance, orientation)
             to follow the inspection.
