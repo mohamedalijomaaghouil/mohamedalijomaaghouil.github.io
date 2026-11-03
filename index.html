@@ -2722,6 +2722,13 @@
       ol.pipe li b { color: var(--text); font-size: 14px; }
       @media (max-width: 640px) { ol.pipe { grid-template-columns: 1fr 1fr; } }
       @media (max-width: 380px) { ol.pipe { grid-template-columns: 1fr; } }
+      /* ===== coursework in Education ===== */
+      .coursework { margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--line); }
+      .coursework h4 { margin: 0 0 6px; font: 600 11.5px var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--accent); }
+      .coursework ul { margin: 0; padding-left: 16px; display: grid; gap: 6px; }
+      .coursework li { color: var(--muted); font-size: 13.5px; line-height: 1.5; }
+      .coursework li b { color: var(--text); font-weight: 600; }
+      .coursework li strong { color: var(--text); }
     </style>
   </head>
   <body>
@@ -3417,9 +3424,28 @@
               Master's level) · graduating 2027
             </p>
             <p>
-              Ranked <strong>3rd / 182</strong> in semester 7 · Programming for
-              Robotics 18.8/20
+              Ranked <strong>3rd / 182</strong> in semester 7
             </p>
+            <div class="coursework">
+              <h4>Relevant coursework</h4>
+              <ul>
+                <li><b>Robotics:</b> Basic Robotics <strong>19/20</strong> ·
+                  Programming for Robotics (C++, ROS&nbsp;2) <strong>18.8</strong> ·
+                  Advanced Robotics (inverse kinematics, Cartesian control)
+                  <strong>17</strong> · Dynamics</li>
+                <li><b>Control &amp; actuators:</b> Electrical Actuators (PMSM
+                  control, Simulink) <strong>17.8</strong> · Real-time systems
+                  (multithreading) <strong>16.9</strong></li>
+                <li><b>Vision:</b> Computer Vision, with a real-time augmented-reality
+                  project (camera calibration, pose estimation) · visual servoing
+                  in Sensor Integration</li>
+                <li><b>Deep learning</b> (3rd year, Keras + PyTorch): CNN on
+                  CIFAR-10, <strong>85%</strong> test accuracy vs 45% for a plain
+                  network · action recognition on 1,113 videos (7 classes), up to
+                  <strong>98%</strong> with CNN&nbsp;+&nbsp;RNN models · hands-on
+                  with SAM2 segmentation</li>
+              </ul>
+            </div>
           </div>
           <div class="box reveal">
             <div class="meta">
@@ -3428,6 +3454,17 @@
             <h3>ENISo, École Nationale d'Ingénieurs de Sousse</h3>
             <p>Engineering degree · Mechatronics</p>
             <p>PLCs &amp; industrial networks, control systems, C/C++</p>
+            <div class="coursework">
+              <h4>Relevant coursework</h4>
+              <ul>
+                <li><b>Control:</b> feedback control &amp; regulation · digital
+                  control of mechanical systems</li>
+                <li><b>Mechanics:</b> strength of materials · mechanical design ·
+                  dynamics &amp; vibrations · power transmission</li>
+                <li><b>Electrical:</b> electrical machines · power electronics</li>
+                <li><b>Methods:</b> numerical analysis · CAD/CAM</li>
+              </ul>
+            </div>
           </div>
         </div>
 
