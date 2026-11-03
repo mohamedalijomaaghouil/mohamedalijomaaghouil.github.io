@@ -2667,19 +2667,6 @@
       .skill-prompt { display: none !important; }
       .skill-trigger { pointer-events: none; cursor: default; min-height: 0 !important; padding-bottom: 6px !important; }
       .skill-card { transform: none !important; }
-      .cert-viewport { height: auto; perspective: none; overflow: visible; }
-      .cert-ring {
-        position: static; width: auto; height: auto; margin: 0;
-        display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px;
-        animation: none !important; transform: none !important;
-      }
-      .cert-face { position: static; transform: none !important; backface-visibility: visible; min-height: 190px; }
-      .cert-showcase { padding: 16px; }
-      .cert-showcase::before { display: none; }
-      .cert-toggle { display: none; }
-      .cert-controls { margin-top: 12px; }
-      @media (max-width: 620px) { .cert-ring { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-      @media (max-width: 380px) { .cert-ring { grid-template-columns: 1fr; } }
       /* ===== result charts in project dialogs ===== */
       :root { --ch-raw: #7d8696; }
       :root[data-theme="light"] { --ch-raw: #3f4650; }
@@ -3471,7 +3458,7 @@
         <h2 style="margin-top: 48px; font-size: 22px">Certifications</h2>
         <div
           class="cert-showcase reveal"
-          aria-label="Six certifications"
+          aria-label="Rotating showcase of six certifications"
         >
           <div class="cert-viewport">
             <div class="cert-ring" id="certRing">
@@ -3534,6 +3521,8 @@
                 class="cert-face"
                 style="--index: 3; --cert-color: #ed4343"
                 href="assets/docs/cswa-certificate.jpg"
+                data-lightbox="assets/docs/cswa-certificate.jpg"
+                data-cap="SOLIDWORKS CSWA certification · Dassault Systèmes · Feb 2025"
                 target="_blank"
                 rel="noopener"
                 aria-label="SOLIDWORKS CSWA, view certificate"
@@ -3552,6 +3541,8 @@
                 class="cert-face"
                 style="--index: 4; --cert-color: #3c9ed9"
                 href="assets/docs/toeic-certificate.jpg"
+                data-lightbox="assets/docs/toeic-certificate.jpg"
+                data-cap="TOEIC Listening &amp; Reading · 955 / 990 (C1) · July 2025"
                 target="_blank"
                 rel="noopener"
                 aria-label="TOEIC 955 / 990, view certificate"
@@ -3589,7 +3580,7 @@
             </div>
           </div>
           <div class="cert-controls">
-            <p>Select a certificate to view it</p>
+            <p>Always rotating · Select a certificate to view it</p>
             <button
               id="certToggle"
               class="cert-toggle"
@@ -4452,7 +4443,8 @@
         const lightbox = document.getElementById("lightbox");
         const lbBody = document.getElementById("lbBody");
         document.querySelectorAll("[data-lightbox]").forEach((button) =>
-          button.addEventListener("click", () => {
+          button.addEventListener("click", (event) => {
+            if (button.tagName === "A") event.preventDefault();
             const src = button.dataset.lightbox;
             if (!src) return;
             transitionTo(() => {
