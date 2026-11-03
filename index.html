@@ -3037,8 +3037,8 @@
             <a class="code-link" href="https://github.com/mohamedalijomaaghouil/defect-detection-robotics" target="_blank" rel="noopener" aria-label="Source code on GitHub">&lt;/&gt; Code ↗</a>
           </div>
 
-          <div class="pcard wide reveal">
-          <button class="card wide" data-open="dlg-followme">
+          <div class="pcard reveal">
+          <button class="card" data-open="dlg-followme">
             <div class="media">
               <video
                 muted
@@ -3067,6 +3067,34 @@
             </div>
           </button>
             <a class="code-link" href="https://github.com/mohamedalijomaaghouil/follow-me-person-following-robot" target="_blank" rel="noopener" aria-label="Source code on GitHub">&lt;/&gt; Code ↗</a>
+          </div>
+
+          <div class="pcard reveal">
+          <button class="card" data-open="dlg-calib">
+            <div class="media">
+              <img
+                loading="lazy"
+                src="assets/img/calib-ar-house.jpg"
+                alt="3D house and nameplate drawn live on a chessboard held in front of the webcam"
+              />
+            </div>
+            <div class="body">
+              <div class="meta">
+                <span>SIGMA Clermont · pair project</span><span>2025</span>
+              </div>
+              <h3>Camera calibration and live augmented reality</h3>
+              <p>
+                Calibrated a webcam from 20 chessboard images with a
+                0.25&nbsp;px reprojection error, then used the board's pose to
+                draw a 3D cube and house on it in real time.
+              </p>
+              <div class="tags">
+                <span class="tag">OpenCV</span><span class="tag">Calibration</span
+                ><span class="tag">solvePnP</span><span class="tag">Python</span>
+              </div>
+            </div>
+          </button>
+            <a class="code-link" href="https://github.com/mohamedalijomaaghouil/camera-calibration-ar" target="_blank" rel="noopener" aria-label="Source code on GitHub">&lt;/&gt; Code ↗</a>
           </div>
         </div>
       </section>
@@ -3423,8 +3451,9 @@
                 <li><b>Control &amp; actuators:</b> Electrical Actuators (PMSM
                   control, Simulink) <strong>17.8</strong> · Real-time systems
                   (multithreading) <strong>16.9</strong></li>
-                <li><b>Vision:</b> Computer Vision, with a real-time augmented-reality
-                  project (camera calibration, pose estimation) · visual servoing
+                <li><b>Vision:</b> Computer Vision: camera calibration (0.25&nbsp;px
+                  reprojection error) and real-time augmented reality, CamShift
+                  tracking, SIFT matching · visual servoing
                   in Sensor Integration</li>
                 <li><b>Deep learning</b> (3rd year, Keras + PyTorch): CNN on
                   CIFAR-10, <strong>85%</strong> test accuracy vs 45% for a plain
@@ -4160,6 +4189,62 @@
       </div>
     </dialog>
 
+    <dialog id="dlg-calib" aria-label="Camera calibration and live augmented reality">
+      <div class="d-head">
+        <span class="meta"
+          >SIGMA Clermont · Computer Vision, Pr. Youcef Mezouar · October 2025</span
+        ><button class="icon-btn" data-close aria-label="Close">✕</button>
+      </div>
+      <div class="d-body">
+        <h3>Camera calibration and live augmented reality</h3>
+        <p class="sub">
+          Pair project with Mohamed Taher Guerbej: a full monocular vision
+          pipeline, from a raw laptop webcam to 3D objects drawn live on a
+          printed chessboard.
+        </p>
+        <h4>Result</h4>
+        <ul>
+          <li>
+            20 webcam images of a 9×6 inner-corner chessboard, taken from
+            different angles: <b>0.25&nbsp;px RMS reprojection error</b>
+            (below 1&nbsp;px counts as a good calibration).
+          </li>
+          <li>
+            Focal lengths ≈ 632 and 633&nbsp;px for a 640×480 image, with
+            radial and tangential distortion checked by undistorting an image.
+          </li>
+        </ul>
+        <h4>Pipeline</h4>
+        <ol class="pipe">
+          <li><b>Capture</b><span>save chessboard images from the webcam</span></li>
+          <li><b>Corners</b><span>detect the 9×6 grid, refine to sub-pixel accuracy</span></li>
+          <li><b>Calibrate</b><span>intrinsic matrix, distortion coefficients, reprojection error</span></li>
+          <li><b>Pose</b><span><code>solvePnP</code> gives the board's rotation and translation</span></li>
+          <li><b>Project</b><span><code>projectPoints</code> draws 3D axes, a cube, then a house with a floating nameplate</span></li>
+          <li><b>Live</b><span>the whole chain runs on every webcam frame</span></li>
+        </ol>
+        <div class="gallery" style="margin-top: 18px">
+          <img loading="lazy" src="assets/img/calib-corners.jpg" alt="Detected and refined chessboard corners" />
+          <img loading="lazy" src="assets/img/calib-axes.jpg" alt="3D axes projected with the estimated pose" />
+          <img loading="lazy" src="assets/img/calib-ar-cube.jpg" alt="Live AR cube on the chessboard" />
+          <img loading="lazy" src="assets/img/calib-ar-house.jpg" alt="Live AR house with a floating nameplate" />
+        </div>
+        <p class="note">
+          Same course: solo mini-projects on CamShift tracking (with a
+          confidence check that detects when the target is lost), SIFT +
+          FLANN object detection, and shape and blob detection.
+        </p>
+        <div class="btns" style="margin-top: 20px">
+          <a
+            class="btn"
+            href="https://github.com/mohamedalijomaaghouil/camera-calibration-ar"
+            target="_blank"
+            rel="noopener"
+            >Code on GitHub ↗</a
+          >
+        </div>
+      </div>
+    </dialog>
     <dialog id="dlg-followme" aria-label="FOLLOW-ME robot">
       <div class="d-head">
         <span class="meta">ENISo · 2nd-year project · Jan – May 2025</span
