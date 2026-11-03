@@ -3015,7 +3015,7 @@
             </div>
             <div class="body">
               <div class="meta">
-                <span>SIGMA Clermont · team of 3</span><span>2025–26</span>
+                <span>SIGMA Clermont · robotics sub-team of 3</span><span>2025–26</span>
               </div>
               <h3>Robotic defect inspection with a UR3e</h3>
               <p>
@@ -4045,9 +4045,9 @@
       <div class="d-body">
         <h3>Robotic defect inspection with a UR3e</h3>
         <p class="sub">
-          Semester 7–8 team project (3 students), ranked 2nd of 93. A UR3e with
-          an Intel RealSense camera photographs a shoe from several angles to
-          detect defects.
+          Semester 7–8 project of 8 students, ranked 2nd of 93; I was in the
+          robotics sub-team of 3. A UR3e with an Intel RealSense camera
+          photographs a shoe from several angles to detect defects.
         </p>
         <h4>My part: where is the part?</h4>
         <ul>
@@ -4064,10 +4064,17 @@
             A live annotated control image (bounding box, distance, orientation)
             to follow the inspection.
           </li>
+          <li>
+            Tested on a ROS&nbsp;2 recording (285 synchronised colour + depth
+            frames), live in Gazebo, then on the real camera above the UR3e.
+            With no shoe on the table, the node reports "no object" instead of
+            a false position.
+          </li>
         </ul>
         <p class="note">
-          My teammates handled motion planning, simulation and the deep-learning
-          defect detection.
+          My two robotics teammates handled motion planning and the Gazebo
+          simulation; the other students built the dataset and the
+          deep-learning defect detection.
         </p>
         <div class="gallery" style="margin-top: 18px">
           <img
