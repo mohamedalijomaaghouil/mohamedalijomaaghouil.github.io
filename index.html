@@ -2648,6 +2648,38 @@
           animation: none !important;
         }
       }
+      /* ===== 2026-11-03 review fixes ===== */
+      .pcard { position: relative; display: flex; min-width: 0; }
+      .pcard > .card { flex: 1; width: 100%; }
+      .pcard.wide { grid-column: 1/-1; }
+      .code-link {
+        position: absolute; top: 12px; left: 12px; z-index: 2;
+        font: 600 12px var(--mono); color: #fff; text-decoration: none;
+        background: rgba(0, 0, 0, 0.7); border: 1px solid rgba(255, 255, 255, 0.25);
+        padding: 6px 10px; border-radius: 8px;
+        transition: transform 0.25s, background 0.2s, border-color 0.2s;
+      }
+      .code-link:hover, .code-link:focus-visible {
+        background: var(--accent); color: #04110c; border-color: var(--accent);
+      }
+      .pcard:hover .code-link { transform: translateY(-3px); }
+      .skill-card .skill-content { max-height: none !important; opacity: 1 !important; visibility: visible !important; }
+      .skill-prompt { display: none !important; }
+      .skill-trigger { pointer-events: none; cursor: default; min-height: 0 !important; padding-bottom: 6px !important; }
+      .skill-card { transform: none !important; }
+      .cert-viewport { height: auto; perspective: none; overflow: visible; }
+      .cert-ring {
+        position: static; width: auto; height: auto; margin: 0;
+        display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px;
+        animation: none !important; transform: none !important;
+      }
+      .cert-face { position: static; transform: none !important; backface-visibility: visible; min-height: 190px; }
+      .cert-showcase { padding: 16px; }
+      .cert-showcase::before { display: none; }
+      .cert-toggle { display: none; }
+      .cert-controls { margin-top: 12px; }
+      @media (max-width: 620px) { .cert-ring { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+      @media (max-width: 380px) { .cert-ring { grid-template-columns: 1fr; } }
     </style>
   </head>
   <body>
@@ -2752,7 +2784,7 @@
             <i></i
             ><span
               >Looking for a 6-month end-of-studies internship (PFE) from
-              <strong>7&nbsp;March&nbsp;2027</strong>, anywhere in France</span
+              <strong>7&nbsp;March&nbsp;2027</strong>, ideally in Île-de-France, open to all of France</span
             >
           </div>
           <div class="btns">
@@ -2799,7 +2831,7 @@
       <!-- HIGHLIGHTS: 2x2 quad -->
       <section id="highlights">
         <p class="kicker">Highlights</p>
-        <h2>Robots on top, people below</h2>
+        <h2>In 30 seconds</h2>
         <div class="quad reveal" id="quad">
           <button
             class="q-tile"
@@ -2875,15 +2907,16 @@
         <p class="kicker">Projects</p>
         <h2>Things I built on real hardware</h2>
         <div class="grid">
-          <button class="card wide reveal" data-open="dlg-ur5e">
+          <div class="pcard wide reveal">
+          <button class="card wide" data-open="dlg-ur5e">
             <div class="media">
               <video
                 muted
                 loop
                 playsinline
                 preload="none"
-                poster="assets/img/poster-citius-demo.jpg"
-                data-src="assets/video/citius-demo-loop.mp4"
+                poster="assets/img/poster-citius-pickplace-loop.jpg"
+                data-src="assets/video/citius-pickplace-loop.mp4"
               ></video>
             </div>
             <div class="body">
@@ -2904,8 +2937,11 @@
               </div>
             </div>
           </button>
+            <a class="code-link" href="https://github.com/mohamedalijomaaghouil/robota-sudoe-ur5e-ros2" target="_blank" rel="noopener" aria-label="Source code on GitHub">&lt;/&gt; Code ↗</a>
+          </div>
 
-          <button class="card reveal" data-open="dlg-hexe">
+          <div class="pcard reveal">
+          <button class="card" data-open="dlg-hexe">
             <div class="media">
               <img
                 loading="lazy"
@@ -2930,8 +2966,11 @@
               </div>
             </div>
           </button>
+            <a class="code-link" href="https://github.com/mohamedalijomaaghouil/robota-sudoe-hex-e-v2" target="_blank" rel="noopener" aria-label="Source code on GitHub">&lt;/&gt; Code ↗</a>
+          </div>
 
-          <button class="card reveal" data-open="dlg-inspection">
+          <div class="pcard reveal">
+          <button class="card" data-open="dlg-inspection">
             <div class="media">
               <img
                 loading="lazy"
@@ -2955,16 +2994,19 @@
               </div>
             </div>
           </button>
+            <a class="code-link" href="https://github.com/mohamedalijomaaghouil/defect-detection-robotics" target="_blank" rel="noopener" aria-label="Source code on GitHub">&lt;/&gt; Code ↗</a>
+          </div>
 
-          <button class="card reveal" data-open="dlg-followme">
+          <div class="pcard wide reveal">
+          <button class="card wide" data-open="dlg-followme">
             <div class="media">
               <video
                 muted
                 loop
                 playsinline
                 preload="none"
-                poster="assets/img/poster-followme.jpg"
-                data-src="assets/video/followme-loop.mp4"
+                poster="assets/img/poster-followme-pose.jpg"
+                data-src="assets/video/followme-pose-loop.mp4"
               ></video>
             </div>
             <div class="body">
@@ -2984,33 +3026,8 @@
               </div>
             </div>
           </button>
-
-          <button class="card reveal" data-open="dlg-arduino">
-            <div class="media">
-              <video
-                muted
-                loop
-                playsinline
-                preload="none"
-                poster="assets/img/poster-enisoteam-robot.jpg"
-                data-src="assets/video/enisoteam-loop.mp4"
-              ></video>
-            </div>
-            <div class="body">
-              <div class="meta">
-                <span>ENISo Team robotics club</span><span>2023–24</span>
-              </div>
-              <h3>Where it started: a 4-wheel Arduino robot</h3>
-              <p>
-                My first robot, built from scratch in the ENISo robotics club's
-                first tutorial.
-              </p>
-              <div class="tags">
-                <span class="tag">Arduino Uno</span
-                ><span class="tag">DC motors</span>
-              </div>
-            </div>
-          </button>
+            <a class="code-link" href="https://github.com/mohamedalijomaaghouil/follow-me-person-following-robot" target="_blank" rel="noopener" aria-label="Source code on GitHub">&lt;/&gt; Code ↗</a>
+          </div>
         </div>
       </section>
 
@@ -3055,27 +3072,24 @@
             <div class="when">Jun – Aug 2025</div>
             <ul>
               <li>
-                Studied a robotic quality-control cell in production: KUKA
-                robot, KEYENCE industrial vision, sensors.
-              </li>
-              <li>
                 Wrote Python tools (NumPy, Pandas, Matplotlib) to process and
                 visualise industrial data.
+              </li>
+              <li>
+                Analysed a robotic quality-control cell in production: KUKA
+                robot, KEYENCE industrial vision, sensors.
               </li>
             </ul>
           </li>
           <li class="reveal">
             <div>
               <h3>Shop-floor Intern · Production &amp; Test Benches</h3>
-              <div class="org">COLMAR S.A. · Monastir, Tunisia</div>
+              <div class="org">
+                COLMAR S.A. · Monastir, Tunisia · discovery internship on
+                automated production lines and test benches
+              </div>
             </div>
             <div class="when">Jun – Jul 2024</div>
-            <ul>
-              <li>
-                Observed automated industrial processes and analysed the test
-                benches.
-              </li>
-            </ul>
           </li>
         </ol>
       </section>
@@ -3312,92 +3326,34 @@
           </div>
         </article>
 
-        <div class="mini">
-          <article class="lead-card reveal">
-            <h3>ENISo Team</h3>
-            <p class="org">Robotics club · 2023–24</p>
+        <article class="lead-card reveal">
+          <div>
+            <h3>Also along the way</h3>
             <ul>
               <li>
-                First hands-on robotics: an Arduino Uno 4-wheel robot built from
-                scratch.
+                <strong>ENISo Team robotics club</strong> (2023–24): my first
+                robot, an Arduino Uno 4-wheel robot built from scratch.
               </li>
-            </ul>
-            <div class="mosaic">
-              <button
-                class="play"
-                data-lightbox="assets/video/enisoteam-robot.mp4"
-                data-cap="ENISo Team, first robot"
-              >
-                <img
-                  loading="lazy"
-                  src="assets/img/poster-enisoteam-robot.jpg"
-                  alt="Arduino robot"
-                />
-              </button>
-            </div>
-          </article>
-          <article class="lead-card reveal">
-            <h3>Deep Learning IndabaX Tunisia</h3>
-            <p class="org">Participant · 2025</p>
-            <ul>
               <li>
-                Tunisia's edition of the African deep-learning community event.
+                <strong>Deep Learning IndabaX Tunisia</strong> (2025):
+                participant in the African deep-learning community event.
               </li>
             </ul>
-            <div class="mosaic">
-              <button
-                data-lightbox="assets/img/indabax.jpg"
-                data-cap="IndabaX Tunisia 2025"
-              >
-                <img
-                  loading="lazy"
-                  src="assets/img/indabax.jpg"
-                  alt="At IndabaX Tunisia 2025"
-                />
-              </button>
-              <button
-                data-lightbox="assets/img/indabax-1948.jpg"
-                data-cap="IndabaX Tunisia 2025"
-              >
-                <img
-                  loading="lazy"
-                  src="assets/img/indabax-1948.jpg"
-                  alt="IndabaX name card"
-                />
-              </button>
-            </div>
-          </article>
-          <article class="lead-card reveal">
-            <h3>Industrial visit, SOPAL</h3>
-            <p class="org">ENISo · 2025</p>
-            <ul>
-              <li>Factory visit organised by ENISo.</li>
-            </ul>
-            <div class="mosaic">
-              <button
-                data-lightbox="assets/img/sopal-4701.jpg"
-                data-cap="SOPAL visit, 2025"
-              >
-                <img
-                  loading="lazy"
-                  src="assets/img/sopal-4701.jpg"
-                  alt="In front of SOPAL"
-                />
-              </button>
-              <button
-                data-lightbox="assets/img/sopal-inside.jpg"
-                data-cap="SOPAL visit, 2025"
-              >
-                <img
-                  loading="lazy"
-                  src="assets/img/sopal-inside.jpg"
-                  alt="Inside the SOPAL plant"
-                />
-              </button>
-            </div>
-          </article>
-        </div>
-      </section>
+          </div>
+          <div class="mosaic" style="grid-template-columns: repeat(2, minmax(0, 1fr))">
+            <button
+              class="play"
+              data-lightbox="assets/video/enisoteam-robot.mp4"
+              data-cap="ENISo Team, my first robot"
+            >
+              <img loading="lazy" src="assets/img/poster-enisoteam-robot.jpg" alt="Arduino robot" />
+            </button>
+            <button data-lightbox="assets/img/indabax.jpg" data-cap="IndabaX Tunisia 2025">
+              <img loading="lazy" src="assets/img/indabax.jpg" alt="At IndabaX Tunisia 2025" />
+            </button>
+          </div>
+        </article>
+            </section>
 
       <!-- EDUCATION -->
       <section id="education">
@@ -3432,7 +3388,7 @@
         <h2 style="margin-top: 48px; font-size: 22px">Certifications</h2>
         <div
           class="cert-showcase reveal"
-          aria-label="Rotating showcase of six certifications"
+          aria-label="Six certifications"
         >
           <div class="cert-viewport">
             <div class="cert-ring" id="certRing">
@@ -3550,7 +3506,7 @@
             </div>
           </div>
           <div class="cert-controls">
-            <p>Always rotating · Select a certificate to view it</p>
+            <p>Select a certificate to view it</p>
             <button
               id="certToggle"
               class="cert-toggle"
@@ -3563,16 +3519,13 @@
         </div>
 
         <h2 style="margin-top: 48px; font-size: 22px">Skills</h2>
-        <p class="skills-hint">
-          Hover over a card to explore the tools and techniques. Tap or press
-          Enter to expand on touch devices.
-        </p>
         <div class="skills-cards" aria-label="Skills by category">
-          <article class="skill-card reveal" style="--skill-index: 0">
+          <article class="skill-card is-open reveal" style="--skill-index: 0">
             <button
               type="button"
               class="skill-trigger"
-              aria-expanded="false"
+              tabindex="-1"
+              aria-expanded="true"
               aria-controls="skill-list-0"
               aria-label="Show Robotics skills"
             >
@@ -3598,11 +3551,12 @@
               </div>
             </div>
           </article>
-          <article class="skill-card reveal" style="--skill-index: 1">
+          <article class="skill-card is-open reveal" style="--skill-index: 1">
             <button
               type="button"
               class="skill-trigger"
-              aria-expanded="false"
+              tabindex="-1"
+              aria-expanded="true"
               aria-controls="skill-list-1"
               aria-label="Show Vision and AI skills"
             >
@@ -3627,11 +3581,12 @@
               </div>
             </div>
           </article>
-          <article class="skill-card reveal" style="--skill-index: 2">
+          <article class="skill-card is-open reveal" style="--skill-index: 2">
             <button
               type="button"
               class="skill-trigger"
-              aria-expanded="false"
+              tabindex="-1"
+              aria-expanded="true"
               aria-controls="skill-list-2"
               aria-label="Show Programming skills"
             >
@@ -3655,11 +3610,12 @@
               </div>
             </div>
           </article>
-          <article class="skill-card reveal" style="--skill-index: 3">
+          <article class="skill-card is-open reveal" style="--skill-index: 3">
             <button
               type="button"
               class="skill-trigger"
-              aria-expanded="false"
+              tabindex="-1"
+              aria-expanded="true"
               aria-controls="skill-list-3"
               aria-label="Show Industrial skills"
             >
@@ -3682,11 +3638,12 @@
               </div>
             </div>
           </article>
-          <article class="skill-card reveal" style="--skill-index: 4">
+          <article class="skill-card is-open reveal" style="--skill-index: 4">
             <button
               type="button"
               class="skill-trigger"
-              aria-expanded="false"
+              tabindex="-1"
+              aria-expanded="true"
               aria-controls="skill-list-4"
               aria-label="Show Simulation and CAD skills"
             >
@@ -3709,11 +3666,12 @@
               </div>
             </div>
           </article>
-          <article class="skill-card reveal" style="--skill-index: 5">
+          <article class="skill-card is-open reveal" style="--skill-index: 5">
             <button
               type="button"
               class="skill-trigger"
-              aria-expanded="false"
+              tabindex="-1"
+              aria-expanded="true"
               aria-controls="skill-list-5"
               aria-label="Show Languages skills"
             >
